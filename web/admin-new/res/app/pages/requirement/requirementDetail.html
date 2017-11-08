@@ -1,0 +1,252 @@
+<div class="requirement-detail-page row common">
+	<div class="box col-md-12">
+		<ol class="breadcrumb"><li><a ui-sref="index">首页</a></li><li><a ui-sref="requirement">业务需求列表</a></li><li class="active">需求详情及管理员操作</li></ol>
+		<div class="breadcrumb">
+
+			<h3>需求详细信息：</h3>
+			<div class="panel panel-info ng-scope table-responsive panel-common">
+				<div class="panel-heading clearfix">
+					<h2 class="panel-title">
+						{{user.user.username}} 业主 (手机号码：{{user.user.phone}})
+					</h2>
+					<h4>
+						{{user.basic_address}}
+						<small>装修需求（需求编号{{user._id}}）</small>
+					</h4>
+				</div>
+
+				<div class="panel-body table-responsive">
+					<table class="table table-bordered table-striped">
+						<tbody>
+							<tr>
+								<td class="col-md-4">装修城市</td>
+								<td>{{user.province}} {{user.city}} {{user.district}}</td>
+							</tr>
+
+							<tr>
+								<td>需求状态</td>
+								<td>{{user.status | requirementFilter}}</td>
+							</tr>
+
+							<tr>
+								<td>详细地址</td>
+								<td>{{user.basic_address}} {{user.detail_address}}</td>
+							</tr>
+
+							<tr>
+								<td>装修类别</td>
+								<td>{{user.dec_type | decTypeFilter}}</td>
+							</tr>
+
+							<tr>
+								<td>包类型</td>
+								<td>{{user.package_type | requirePackageTypeFilter}}</td>
+							</tr>
+
+							<tr>
+								<td>计划常住成员</td>
+								<td>{{user.family_description}}</td>
+							</tr>
+
+							<tr>
+								<td>风格喜好</td>
+								<td>{{user.dec_style | decStyleFilter}}</td>
+							</tr>
+
+							<tr>
+								<td>装修户型</td>
+								<td>{{user.house_type | houseTypeFilter}}</td>
+							</tr>
+
+							<tr>
+								<td>装修面积</td>
+								<td>{{user.house_area}} m&sup2;</td>
+							</tr>
+
+							<tr>
+								<td>包工类型</td>
+								<td>{{user.work_type | workTypeFilter}}</td>
+							</tr>
+
+							<tr>
+								<td>装修预算</td>
+								<td>{{user.total_price}} 万元</td>
+							</tr>
+
+							<tr>
+								<td>偏好设计师类型</td>
+								<td>{{user.communication_type | designTypeFilter}}</td>
+							</tr>
+
+							<tr>
+								<td>偏好设计师性别</td>
+								<td>{{user.prefer_sex | sexFilter}}</td>
+							</tr>
+
+							<tr>
+								<td>匹配设计师</td>
+								<td ng-if="recDesignerList">
+									匹配设计师：
+									<span ng-repeat="user in recDesignerList">
+										<a ui-sref="designerInfo({id:user._id})">{{user.username}}({{user.phone}})</a>
+									</span>
+								</td>
+								<td ng-if="!recDesignerList"></td>
+							</tr>
+
+							<tr>
+								<td>所有预约设计师</td>
+								<td ng-if="designerList">
+									所有预约设计师：
+									<span ng-repeat="user in designerList">
+									<a ui-sref="designerInfo({id:user._id})">{{user.username}}({{user.phone}})</a>
+									</span>
+								</td>
+								<td ng-if="!designerList"></td>
+							</tr>
+
+							<tr>
+								<td>成交设计师</td>
+								<td ng-if="finalDesigner">
+									成交设计师：
+									<a ui-sref="designerInfo({id:finalDesigner._id})">{{finalDesigner.username}}({{finalDesigner.phone}})
+									</a>
+								</td>
+								<td ng-if="!finalDesigner"></td>
+							</tr>
+
+							<tr ng-if="user.work_type!=2">
+								<td>操作</td>
+								<td>
+									<table class="table-reset">
+										<tr>
+											<td>开启工地：</td>
+											<td>
+												<button type="button" class="btn btn-primary"
+													ng-click="startProcess(user)"
+													ng-if="user.status == 0 || user.status == 1 ||
+														user.status == 2 || user.status == 6 ||
+														user.status == 3 || user.status == 4 ||
+														user.status == 7">开启</button>
+												<span ng-if="user.status == 5 || user.status == 8" class="is-start">已开启</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="assignDesigner-page">
+				<h3>指派设计师：</h3>
+			  <search-input config="config" delegate="delegate"></search-input>
+			  <div class="panel panel-info ng-scope text-center table-responsive">
+			  	<table class="table table-bordered table-striped">
+			  		<tbody>
+			  			<tr class="info thead text-nowrap">
+			  				<th class="text-center">设计师ID</th>
+			  				<th class="text-center">设计师姓名</th>
+			  				<th class="text-center">设计师电话</th>
+			  				<th class="text-center">管理员操作</th>
+			  			</tr>
+			  			<tr ng-repeat="user in userList" class="text-nowrap">
+			  				<td>{{user._id}}</td>
+			  				<td><a ui-sref="designerInfo({id:user._id})">{{user.username}}</a></td>
+			  				<td>{{user.phone}}</td>
+			  				<td>
+			            <a href="javascript:" ng-click="assignDesigner(user)" ng-class="user.isAssign?'assigned':''">{{user.isAssign?'已指派':'指派'}}</a>
+			  				</td>
+			  			</tr>
+			  		</tbody>
+			  	</table>
+			  	<load-data ng-hide="loading.loadData"></load-data>
+			  	<no-data ng-if="loading.notData"></no-data>
+			  </div>
+			  <div class="text-center" ng-if="loading.loadData && !loading.notData">
+			  	<uib-pagination total-items="pagination.totalItems" first-text="首页" next-text="下一页" previous-text="上一页" last-text="尾页" ng-model="pagination.currentPage" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" rotate="false" ng-change="pagination.pageChanged()"></uib-pagination>
+			  	<span class="pagecode">当前：{{pagination.currentPage}} / {{numPages}} 页 总共 {{pagination.totalItems}} 条数据</span>
+			  </div>
+			</div>
+
+			<h3>方案列表：</h3>
+			<div class="panel panel-info ng-scope table-responsive">
+				<table class="table tab-plan">
+					<tbody ng-repeat="user in designerList">
+						<tr class="info thead" ng-class="{false:'tab-hide'}[$even]">
+							<th>方案Id</th>
+							<th>方案名字</th>
+							<th>提交时间</th>
+							<th>获取电话时间</th>
+							<th>量房时间</th>
+							<th>设计师姓名</th>
+							<th>设计师电话</th>
+							<th>当前状态</th>
+							<th>确认量房</th>
+							<th>选择方案</th>
+							<th>方案操作</th>
+						</tr>
+						<tr ng-class="{false:'tr-odd'}[$even]" ng-repeat="plan in user.plans">
+							<td>{{plan._id}}</td>
+							<td>{{plan.name}}</td>
+							<td>{{plan.request_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+							<td>{{plan.get_phone_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+							<td>{{plan.house_check_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+							<td>{{user.username}}</td>
+							<td>{{user.phone}}</td>
+							<td>{{plan.status | planFilter}}</td>
+							<td>
+								<button type="button" class="btn btn-primary"
+								ng-click="houseChecked(user)"
+								ng-if="plan.status == 0 || plan.status == 1 ||
+									plan.status == 7 || plan.status == 2">确认</button>
+								<span ng-if="plan.status == 6 || plan.status == 8 ||
+									plan.status == 3 || plan.status == 4 ||
+									plan.status == 5 || plan.status == 9">已量房</span>
+							</td>
+							<td>
+								<button type="button" class="btn btn-primary"
+								ng-click="choosePlan(user, plan)"
+								ng-if="plan.status != 5">选中</button>
+								<span ng-if="plan.status == 5">已选中</span>
+							</td>
+							<td>
+								<a href="javascript:;" class="btns browse"
+									ng-click="plan.status==3 || plan.status==4 || plan.status==5 ? viewPlan(plan._id):''"
+									ng-class="plan.status==3 || plan.status==4 || plan.status==5 ?
+										'view': 'disable'">预览方案</a>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<h3>所有服务评价：</h3>
+			<div class="panel panel-info ng-scope table-responsive">
+				<table class="table table-bordered table-striped">
+			    <tbody>
+			    	<tr class="info thead">
+			        <th>序号</th>
+			        <th>设计师</th>
+			        <th>是否匿名评价</th>
+			        <th>响应速度</th>
+			        <th>服务态度</th>
+			        <th>评价内容</th>
+			      </tr>
+			      <tr ng-repeat="e in designerList">
+			        <td scope="row">{{$index+1}}</th>
+			        <td>{{e.username}}({{e.phone}})</td>
+			        <td>{{e.evaluation.is_anonymous == 1 ? "匿名" : "实名"}}</td>
+			        <td>{{e.evaluation.respond_speed}} 星</td>
+			        <td>{{e.evaluation.service_attitude}} 星</td>
+			        <td>{{e.evaluation.comment}}</td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+.field-detail-page .panel-heading{
+	height: auto;
+}
+.field-detail-page .panel-heading h5{
+	margin: 0;
+}
+.field-detail-page .assigned{
+	color: #044c45;
+}

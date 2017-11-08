@@ -1,0 +1,247 @@
+<form>
+  <div class="form-group">
+    <label for="phone">设计师查询：</label>
+    <input type="text" class="form-control" placeholder="可以输入手机号码或者设计师姓名" ng-model="phone" ng-blur="phoneChange(phone)">
+  </div>
+  <div class="form-group">
+  	<label for="phone">设计师列表：</label>
+    <kv-dropdown curkey="dataMapped.designerid" keyval="num:name" opts="designer">
+    </kv-dropdown>
+  </div>
+  <div class="form-group">
+     <label>上传封面图</label>
+     <upload-image id="upload1" ids="[dataMapped.cover_imageid]" max-image-count="1" uploader="uploader1"><upload-image>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">项目经理：</label>
+    <input type="text" class="form-control" ng-model="dataMapped.manager" placeholder="请输入项目经理">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">直播时间：</label>
+    <p class="input-group" style="width:50%">
+        <input type="text" class="form-control" uib-datepicker-popup ng-model="dataMapped.start_at" is-open="startTime.status.opened" datepicker-options="startTime.dateOptions" close-text="关闭" clear-text="清除" current-text="今天" required />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="startTime.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+  </div>
+  <div class="form-group">
+    <label for="">所在地区：</label>
+    <my-cities my-province="dataMapped.province" my-city="dataMapped.city" my-district="dataMapped.district" ng-if="dataMapped"/>
+  </div>
+  <div class="form-group">
+    <label for="">小区名称：</label>
+    <input type="text" class="form-control" ng-model="dataMapped.cell" placeholder="请输入小区名称">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修户型：</label>
+    <kv-dropdown curkey="dataMapped.house_type" keyval="num:name" opts="house_type">
+    </kv-dropdown>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修面积：(m&sup2;)[注意：只能填数字]</label>
+    <input type="text" class="form-control" ng-model="dataMapped.house_area" placeholder="请输入装修面积例如：100">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修风格：</label>
+    <kv-dropdown curkey="dataMapped.dec_style" keyval="num:name" opts="dec_style">
+    </kv-dropdown>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修类型：</label>
+    <kv-dropdown curkey="dataMapped.dec_type" keyval="num:name" opts="dec_type">
+    </kv-dropdown>
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword1">包工类型：</label>
+    <kv-dropdown curkey="dataMapped.work_type" keyval="num:name" opts="work_type">
+    </kv-dropdown>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修造价：(万元)[注意：只能填数字]</label>
+    <input type="text" class="form-control" ng-model="dataMapped.total_price" placeholder="请输入装修造价">
+  </div>
+   <!--<div class="form-group">-->
+    <!--<label for="exampleInputPassword1">设计方案简介：</label>-->
+    <!--<textarea class="form-control" rows="3" ng-model="dataMapped.description" placeholder="请输入设计方案简介"></textarea>-->
+  <!--</div>-->
+  <button type="button" class="btn btn-success" ng-click="editorLive()">编辑装修直播</button>
+</form>
+<style type="text/css">
+  .k-uploadbox {
+      width: 570px;
+  }
+  .k-uploadbox .pic {
+      background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+      float: left;
+      height: 168px;
+      margin: 0 20px 20px 0;
+      overflow: visible;
+      position: relative;
+      text-align: center;
+      width: 168px;
+  }
+  .k-uploadbox .item {
+      float: left;
+      height: 168px;
+      margin: 0 20px 20px 0;
+      position: relative;
+      width: 168px;
+  }
+  .k-uploadbox .item .img {
+      border-radius: 2px;
+      height: 168px;
+      overflow: hidden;
+      width: 168px;
+  }
+  .k-uploadbox .item .close {
+      background: rgba(0, 0, 0, 0) url("../img/user/uploadify-cancel.png") no-repeat scroll center center;
+      cursor: pointer;
+      display: none;
+      height: 20px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 20px;
+  }
+  .k-uploadbox .item:hover .close {
+      display: block;
+  }
+  .k-uploadbox .item img {
+      min-height: 100%;
+      min-width: 100%;
+  }
+  .k-uploadbox .pic .fileBtn, .k-uploadbox .pic .uploadify-button {
+      height: 166px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 166px;
+      z-index: 20;
+  }
+  .k-uploadbox .pic .tips {
+      background-color: #f9f9f9;
+      border: 1px solid #d2d2d2;
+      border-radius: 2px;
+      height: 166px;
+      left: 0;
+      position: absolute;
+      text-align: center;
+      top: 0;
+      width: 166px;
+      z-index: 9;
+  }
+  .k-uploadbox .pic .tips p {
+      color: #999;
+      line-height: 50px;
+      padding-top: 117px;
+  }
+  .k-uploadbox .pic .tips span {
+      height: 32px;
+      left: 50%;
+      margin-left: -16px;
+      margin-top: -16px;
+      position: absolute;
+      top: 50%;
+      width: 32px;
+  }
+  .k-uploadbox .pic .tips span em {
+      background-color: #c3c3c3;
+      height: 32px;
+      left: 15px;
+      position: absolute;
+      top: 0;
+      width: 2px;
+  }
+  .k-uploadbox .pic .tips span i {
+      background-color: #c3c3c3;
+      height: 2px;
+      left: 0;
+      position: absolute;
+      top: 15px;
+      width: 32px;
+  }
+    .k-uploadbox .create-item,  .k-uploadbox .previews-item{
+    width: 168px;
+    height: 168px;
+    padding: 0;
+        margin: 0 20px 20px 0;
+  }
+    .k-uploadbox .previews-item .selecte{
+    display: none;
+  }
+    .k-uploadbox .previews-item .close{
+    display: none;
+  }
+    .k-uploadbox .previews-item:hover .close{
+    display: block;
+  }
+  .k-uploadbox .pic .uploadify-queue, .k-uploadbox .uploadify-queue {
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 166px;
+      z-index: 11;
+  }
+  .k-uploadbox p {
+      padding-top: 10px;
+      text-align: center;
+  }
+  .k-cropMask {
+      background-color: #000;
+      display: none;
+      left: 0;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+  }
+  .k-uploadbox .uploadify-queue-item {
+      background-color: #f5f5f5;
+      border-radius: 3px;
+      font: 11px Verdana,Geneva,sans-serif;
+      margin-top: 5px;
+      max-width: 350px;
+      padding: 10px;
+  }
+  .k-uploadbox .uploadify-error {
+      background-color: #fde5dd !important;
+  }
+  .k-uploadbox .uploadify-queue-item.completed {
+      background-color: #e5e5e5;
+  }
+  .k-uploadbox .uploadify-progress {
+      background-color: #e5e5e5;
+      margin-top: 10px;
+      width: 100%;
+  }
+  .k-uploadbox .uploadify-progress-bar {
+      background-color: #09f;
+      height: 3px;
+      width: 1px;
+  }
+  .k-uploadbox .up_filename, .k-uploadbox .delfilebtn, .k-uploadbox .progressnum {
+      display: none;
+  }
+  .k-uploadbox .pic .img {
+      border-radius: 120px;
+      display: block;
+      height: 120px;
+      margin: 0 auto;
+      width: 120px;
+  }
+   .k-uploadbox .inofTips {
+      background-color: #fffdf6;
+      border: 1px dashed #d2d2d2;
+      color: #61687a;
+      font-size: 14px;
+      line-height: 50px;
+      margin: 20px 19px;
+      text-align: left;
+  }
+   .k-uploadbox .inofTips i {
+      display: inline-block;
+      margin-left: 6px;
+      text-align: center;
+      width: 40px;
+  }
+</style>

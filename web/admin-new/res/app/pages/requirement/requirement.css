@@ -1,0 +1,52 @@
+.requirement-detail-page .box{
+	padding: 0;
+}
+.requirement-detail-page .breadcrumb{
+	padding: 0;
+}
+.requirement-detail-page .breadcrumb .panel-info .tab-title{
+	background-color: rgba(217, 237, 247, 0.94);
+}
+.requirement-detail-page .breadcrumb .panel-info .tab-title h2,
+.requirement-detail-page .breadcrumb .panel-info .tab-title h4{
+	margin: 0;
+	padding: 5px;
+}
+.requirement-detail-page .breadcrumb .panel-info .tab-title h4{
+	border-bottom: solid 1px #dcdcdc;
+}
+.requirement-detail-page .breadcrumb .panel-heading{
+	height: auto;
+}
+.requirement-detail-page .breadcrumb .panel-heading h4{
+	margin: 0;
+	line-height: 25px;
+}
+.requirement-detail-page .breadcrumb .panel .designer-list{
+	box-shadow: none;
+	margin-left: -15px;
+}
+.requirement-detail-page .breadcrumb .panel .designer-list tbody{
+	background-color: transparent;
+}
+.requirement-detail-page .panel-info .table-reset{
+	box-shadow: none;
+}
+.requirement-detail-page .panel-info .table-reset tbody{
+	background-color: transparent;
+}
+.requirement-detail-page .panel-info .table-reset tbody .is-start{
+	color: #044c45;
+}
+.requirement-detail-page .breadcrumb .panel-info .tab-plan tbody{
+	border: none;
+}
+.requirement-detail-page .breadcrumb .panel-info .tab-plan tbody .tab-hide{
+	display: none;
+}
+.requirement-detail-page .breadcrumb .panel-info .tab-plan tbody td{
+	border: none;
+}
+.requirement-detail-page .breadcrumb .panel-info .tab-plan tbody .disable{
+	color: #a5a3a3;
+}

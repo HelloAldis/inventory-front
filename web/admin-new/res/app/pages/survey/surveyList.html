@@ -1,0 +1,24 @@
+<div class="row survey-list-page">
+  <div class="panel panel-info ng-scope text-center table-responsive">
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr class="info thead">
+          <th class="text-center">问卷ID</th>
+          <th class="text-center">开始时间</th>
+          <th class="text-center">当前状态</th>
+          <th class="text-center">问卷名称</th>
+          <th class="text-center">查看详情</th>
+        </tr>
+        <tr ng-repeat="user in userList">
+          <td>{{user._id}}</td>
+          <td>{{user.create_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+          <td>{{user.status ? '已截止' : '进行中'}}</td>
+          <td>{{user.name}}</td>
+          <td><a ui-sref="surveyDetail({id:user._id})">点击查看</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- <load-data ng-hide="loading.loadData"></load-data>
+<no-data ng-hide="loading.loadData"></no-data> -->

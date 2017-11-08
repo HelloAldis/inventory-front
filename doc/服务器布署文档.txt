@@ -1,0 +1,154 @@
+【挂载磁盘】
+#add to fstab
+echo '/dev/xvdb1    /xvdb    ext3    defaults    0  0' >> /etc/fstab
+
+#mount disk
+mkdir /xvdb
+mount -a
+
+【安装 nvm】
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
+source ~/.bashrc
+
+【安装 node】
+nvm install v0.12.7
+nvm alias default v0.12.7
+nvm use default
+
+【更新 npm】
+npm update npm -g
+
+【安装 cnpm】
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+【安装 tcl】
+yum install tcl
+
+【安装 redis】目录：/xvdb/redis
+wget http://download.redis.io/releases/redis-3.0.5.tar.gz
+tar xzf redis-3.0.5.tar.gz
+cd redis-3.0.5
+make
+make test
+
+【安装第三方库】目录：/xvdb/need-install-lib
+#install zlib-1.2.8
+cd zlib-1.2.8
+./configure
+make
+make install
+
+#install jpeg-9a
+cd jpeg-9a
+./configure
+make
+make install
+
+#install libpng-1.6.17
+cd libpng-1.6.17
+./configure
+make
+make install
+
+#install GraphicsMagick-1.3.21
+cd GraphicsMagick-1.3.21
+./configure
+make
+make install
+
+----------------------------------------------------------------------------------------
+
+【把 redis 注册为系统服务】
+cp /xvdb/redis/redis-3.0.5/utils/redis_init_script /etc/rc.d/init.d/redis
+vi /etc/rc.d/init.d/redis
+    - # chkconfig: 2345 80 90 (add into the second line)
+    - EXEC=/xvdb/redis/redis-3.0.5/src/redis-server (update)
+    - CLIEXEC=/xvdb/redis/redis-3.0.5/src/redis-cli (update)
+    - CONF="/xvdb/redis/redis.conf" (update)
+    - $EXEC $CONF & (add &)
+chkconfig --add redis
+service redis start
+
+【启动 redis】
+/xvdb/redis/redis-3.0.5/src/redis-server
+
+【安装 mongodb】
+vi /etc/yum.repos.d/mongodb-org-3.0.repo
+[mongodb-org-3.0]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.0/x86_64/
+gpgcheck=0
+enabled=1
+
+yum install mongodb-org
+chkconfig mongod on
+vi /etc/mongod.conf (update log and data dir)
+chown -R mongod:mongod /xvdb/log/mongodb
+chown -R mongod:mongod /xvdb/lib/mongo
+service mongod start
+
+Disable Transparent Huge Pages
+https://docs.mongodb.org/manual/tutorial/transparent-huge-pages/
+vi /etc/init.d/disable-transparent-hugepages
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          disable-transparent-hugepages
+# Required-Start:    $local_fs
+# Required-Stop:
+# X-Start-Before:    mongod mongodb-mms-automation-agent
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Disable Linux transparent huge pages
+# Description:       Disable Linux transparent huge pages, to improve
+#                    database performance.
+### END INIT INFO
+
+case $1 in
+  start)
+    if [ -d /sys/kernel/mm/transparent_hugepage ]; then
+      thp_path=/sys/kernel/mm/transparent_hugepage
+    elif [ -d /sys/kernel/mm/redhat_transparent_hugepage ]; then
+      thp_path=/sys/kernel/mm/redhat_transparent_hugepage
+    else
+      return 0
+    fi
+
+    echo 'never' > ${thp_path}/enabled
+    echo 'never' > ${thp_path}/defrag
+
+    unset thp_path
+    ;;
+esac
+
+chmod 755 /etc/init.d/disable-transparent-hugepages
+chkconfig --add disable-transparent-hugepages
+# /sys/kernel/mm/transparent_hugepage start
+/etc/init.d/disable-transparent-hugepages start
+# test
+cat /sys/kernel/mm/transparent_hugepage/enabled
+cat /sys/kernel/mm/transparent_hugepage/defrag
+
+vi /etc/security/limits.conf
+mongod soft nofile 64000
+mongod hard nofile 64000
+mongod soft nproc 32000
+mongod hard nproc 32000
+
+【启动 mongodb】
+service mongod restart
+
+【安装 wkhtmltopdf】
+yum install xorg-x11-fonts-Type1
+yum install xorg-x11-fonts-75dpi
+wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-centos6-amd64.rpm
+rpm -ivh wkhtmltox-0.12.2.1_linux-centos6-amd64.rpm
+yum groupinstall chinese-support
+
+【一些问题解决】
+# resolve issue: gm: error while loading shared libraries: libjpeg.so.9: cannot open shared object file: No such file or directory
+ranlib /usr/local/lib/libjpeg.a
+vi /etc/ld.so.conf.d/libjpeg.conf (add /usr/local/lib)
+ldconfig /usr/local/lib
+
+## 2.3 upgrade to 2.4
+yum install krb5-devel

@@ -1,0 +1,53 @@
+<div class="row diary-page common">
+
+	<date-range-picker config="config" delegate="delegate" dt-start="dtStart" dt-end="dtEnd"></date-range-picker>
+	<search-input config="config" delegate="delegate"></search-input>
+
+	<div class="panel panel-info ng-scope text-center table-responsive">
+		<table class="table table-bordered table-striped">
+			<tbody>
+
+				<tr class="info thead text-nowrap">
+					<th class="text-center">日记ID</th>
+					<th ng-class="{'-1':'tablesorter-headerDesc', undefined:'tablesorter-header', '1':'tablesorter-headerAsc'}[sort.create_at]" ng-click="sortData('create_at')">创建时间&nbsp;</th>
+					<th class="text-center">作者</th>
+					<th class="text-center">内容</th>
+					<th class="text-center">浏览数</th>
+					<th class="text-center">评论数</th>
+					<th class="text-center">点赞数</th>
+					<th class="text-center">日记详情</th>
+					<th class="text-center">管理员操作</th>
+				</tr>
+
+				<tr ng-repeat="user in userList" class="content-width text-nowrap">
+					<td>{{user._id}}</td>
+					<td class="text-left">{{user.create_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td>{{user.user.username}}</td>
+					<td class="text-left">
+						<div class="content">{{user.content}}</div>
+					</td>
+					<td>{{user.view_count}}</td>
+					<td>{{user.comment_count}}</td>
+					<td>{{user.favorite_count}}</td>
+					<td class="text-center">
+						<a href="{{('/tpl/diary/book/' + user.diarySetid + '?diaryid=' + user._id) | pcUrl}}" target="_blank">点击查看</a>
+					</td>
+					<td class="text-center">
+						<a href="javascript:;" ng-click="deleDiary(user._id)">删除</a>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+		<load-data ng-hide="loading.loadData"></load-data>
+		<no-data ng-if="loading.notData"></no-data>
+	</div>
+
+	<div class="text-center" ng-if="loading.loadData && !loading.notData">
+		<uib-pagination total-items="pagination.totalItems" first-text="首页" next-text="下一页" previous-text="上一页" last-text="尾页" ng-model="pagination.currentPage" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" rotate="false" ng-change="pagination.pageChanged()"></uib-pagination>
+		<span class="pagecode">当前：{{pagination.currentPage}} / {{numPages}} 页 总共 {{pagination.totalItems}} 条数据</span>
+	</div>
+	<div class="col-md-12">
+		<div export-data class="hidden-xs"></div>
+	</div>
+</div>

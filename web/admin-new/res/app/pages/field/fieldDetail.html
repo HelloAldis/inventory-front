@@ -1,0 +1,150 @@
+<div class="field-detail-page row common">
+  <search-input delegate="delegate" config="config"></search-input>
+  <div class="row">
+    <h4 class="col-md-12">已指派监理:
+      <strong ng-repeat="item in nameList">{{item.username}}&nbsp;</strong>
+    </h4>
+  </div>
+  <div class="panel panel-info ng-scope text-center table-responsive">
+    <table class="table table-bordered table-striped">
+      <tbody>
+
+        <tr class="info thead">
+          <th class="col-md-4">监理姓名</th>
+          <th>操作 (指派工地的监理)</th>
+        </tr>
+
+        <tr ng-repeat="item in userList" class="content-width text-left">
+          <td>{{item.username}}</td>
+          <td><a href="javascript:" ng-click="operateSupervisor(item)" ng-class="item.isAssign?'assigned':''">{{item.isAssign?'已指派':'指派'}}</a></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <load-data ng-hide="loading.loadData"></load-data>
+    <no-data ng-if="loading.notData"></no-data>
+  </div>
+
+  <div class="text-center" ng-if="loading.loadData && !loading.notData">
+    <uib-pagination total-items="pagination.totalItems" first-text="首页" next-text="下一页" previous-text="上一页" last-text="尾页" ng-model="pagination.currentPage" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" rotate="false" ng-change="pagination.pageChanged()"></uib-pagination>
+    <span class="pagecode">当前：{{pagination.currentPage}} / {{numPages}} 页 总共 {{pagination.totalItems}} 条数据</span>
+  </div>
+
+  <div class="userInfo">
+    <div class="panel panel-info ng-scope panel-common">
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title">工地管理详情</h3>
+      </div>
+      <div class="panel-body table-responsive">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td class="col-md-4">当前阶段</td>
+              <td>{{processes.going_on | fieldsNameFilter}}</td>
+            </tr>
+
+            <tr>
+              <td>创建时间</td>
+              <td>{{processes.create_at | date:'yyyy-MM-dd'}}</td>
+            </tr>
+
+            <tr>
+              <td>开工时间</td>
+              <td>{{processes.start_at | date:'yyyy-MM-dd'}}</td>
+            </tr>
+
+            <tr>
+              <td>工地位置</td>
+              <td>{{user.province ? user.province : '未填写'}} {{user.city}} {{user.district}}</td>
+            </tr>
+
+            <tr>
+              <td>总价</td>
+              <td>{{processes.total_price}} 万元</td>
+            </tr>
+
+            <tr>
+              <td>工地周期</td>
+              <td>{{processes.duration}} 天</td>
+            </tr>
+
+            <tr>
+              <td>装修风格</td>
+              <td>{{processes.dec_style | decStyleFilter}}</td>
+            </tr>
+
+            <tr>
+              <td>装修面积</td>
+              <td>{{processes.house_area}} m&sup2;</td>
+            </tr>
+
+            <tr>
+              <td>装修户型</td>
+              <td>{{processes.house_type | houseTypeFilter}}</td>
+            </tr>
+
+            <tr>
+              <td>包工类型</td>
+              <td>{{processes.work_type | workTypeFilter}}</td>
+            </tr>
+
+            <tr>
+              <td>设计师姓名</td>
+              <td>{{processes.designer.username}}</td>
+            </tr>
+
+            <tr>
+              <td>设计师电话</td>
+              <td>{{processes.designer.phone}}</td>
+            </tr>
+
+            <tr>
+              <td>业主姓名</td>
+              <td>{{processes.user.username}}</td>
+            </tr>
+
+            <tr>
+              <td>业主电话</td>
+              <td>{{processes.user.phone}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div ng-repeat="list in processes.sections" class="col-md-12 padding-clear">
+    <h3 class="bs-callout bs-callout-danger">阶段名称：{{list.name | fieldsNameFilter}} <small>当前状态：{{list.status | fieldstatusFilter}}</small></h3>
+    <p>
+      开始时间：
+      <span>{{list.start_at | date:'yyyy-MM-dd'}}</span>
+      结束时间
+      <span>{{list.end_at | date:'yyyy-MM-dd'}}</span>
+    </p>
+    <div class="panel panel-default" ng-repeat="items in list.items">
+        <div class="panel-heading">
+          <h5>项目名称：{{items.name | fieldsNameFilter}} <small>当前状态：{{items.status | fieldstatusFilter}}</small></h5>
+        </div>
+        <div class="panel-body">
+          <img ng-repeat="img in items.images track by $index" ng-src="/api/v2/web/thumbnail/100/{{img}}" alt="">
+        </div>
+        <ul>
+          <li ng-repeat="comments in items.comments">
+            {{comments}}
+          </li>
+        </ul>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+          <h5>验收时间：{{list.ys.date | date:'yyyy-MM-dd'}}</h5>
+        </div>
+        <div class="panel-body">
+         <img ng-repeat="img in list.ys.images" ng-src="/api/v2/web/thumbnail/100/{{img.imageid}}" alt="">
+        </div>
+    </div>
+  </div>
+</div>
+
+

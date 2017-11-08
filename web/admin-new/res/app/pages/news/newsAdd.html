@@ -1,0 +1,47 @@
+<div class="">
+	<form name="ueditor" class="form-horizontal" ng-submit="newsUeditor()" novalidate>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">文章分类</label>
+		   <div class="col-sm-11">
+					<kv-dropdown curkey="news.articletype" keyval="num:name" opts="article_type">
+			    </kv-dropdown>
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">上传封面图：*图片宽高最好不要小于820x516</label>
+			 <div class="col-sm-11">
+				 <upload-image id="upload1" ids="[news.cover_imageid]" max-image-count="1" uploader="uploader1"><upload-image>
+			 </div>
+		</div>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">文章标题</label>
+		   <div class="col-sm-11">
+		     <input type="text" class="form-control" ng-model="news.title" required />
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">文章关键字<br />（用"|"隔开）</label>
+		   <div class="col-sm-11">
+		     <input type="text" class="form-control" ng-model="news.keywords" required />
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">文章描述</label>
+		   <div class="col-sm-11">
+		   	 <textarea class="form-control" rows="3" ng-model="news.description" required></textarea>
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">文章内容</label>
+		   <div class="col-sm-11">
+		   	 <div class="ueditor" ng-model="news.content" ready="ready" config="config"></div>
+		   </div>
+		</div>
+		<div class="form-group">
+		    <div class="col-sm-offset-1 col-sm-11">
+		      <button type="submit" class="btn btn-default" ng-disabled="ueditor.$invalid">确定</button>
+		      <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+		    </div>
+		  </div>
+	</form>
+</div>

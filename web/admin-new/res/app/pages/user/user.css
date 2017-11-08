@@ -1,0 +1,11 @@
+.user-info-page .breadcrumb{
+	padding: 0;
+}
+
+.assignDesigner-page .assigned{
+	color: #044c45;
+}
+
+.user-requirement-page .has-checked{
+	color: #044c45;
+}

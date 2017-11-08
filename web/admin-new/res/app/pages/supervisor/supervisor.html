@@ -1,0 +1,82 @@
+<div class="comment-page row common">
+	<date-range-picker config="config" delegate="delegate" dt-start="dtStart" dt-end="dtEnd"></date-range-picker>
+	<search-input config="config" delegate="delegate"></search-input>
+
+	<div class="panel panel-info ng-scope text-center table-responsive">
+		<table class="table table-bordered table-striped">
+			<tbody>
+
+				<tr class="info thead text-nowrap">
+					<th class="text-center">监理ID</th>
+					<th>
+						<div ng-class="{'-1':'tablesorter-headerDesc item-width',
+							undefined:'tablesorter-header item-width',
+							'1':'tablesorter-headerAsc item-width'}[sort.create_at]" ng-click="sortData('create_at')">注册时间&nbsp;</div>
+					</th>
+					<th class="text-center">姓名</th>
+					<th class="text-center">性别</th>
+					<th class="text-center">电话</th>
+					<th class="text-center">所在地区</th>
+				</tr>
+
+				<tr ng-repeat="user in userList" class="content-width text-nowrap">
+					<td>{{user._id}}</td>
+					<td class="text-left">{{user.create_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td>{{user.username}}</td>
+					<td>{{user.sex | sexFilter}}</td>
+					<td>{{user.phone}}</td>
+					<td>{{user.province}} {{user.city}} {{user.district}}</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+		<load-data ng-hide="loading.loadData"></load-data>
+		<no-data ng-if="loading.notData"></no-data>
+	</div>
+
+	<div class="text-center" ng-if="loading.loadData && !loading.notData">
+		<uib-pagination total-items="pagination.totalItems" first-text="首页" next-text="下一页" previous-text="上一页" last-text="尾页" ng-model="pagination.currentPage" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" rotate="false" ng-change="pagination.pageChanged()"></uib-pagination>
+		<span class="pagecode">当前：{{pagination.currentPage}} / {{numPages}} 页 总共 {{pagination.totalItems}} 条数据</span>
+	</div>
+	<div class="col-md-12 data-edit">
+		<div export-data class="hidden-xs"></div>
+		<button type="button" class="btn btn-primary" data-toggle="modal" ng-click="showModel()">添加监理</button>
+	</div>
+
+	<div class="modal fade in activeModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="supervisor">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">添加监理</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="message-phone" class="control-label">电话:</label>
+							<input type="number" class="form-control" ng-model="user.phone">
+						</div>
+						<div class="form-group">
+							<label for="message-pass" class="control-label">密码:</label>
+							<input type="text" class="form-control" ng-model="user.pass">
+						</div>
+						<div class="form-group">
+							<label for="message-name" class="control-label">姓名:</label>
+							<input type="text" class="form-control" ng-model="user.username">
+						</div>
+						<div class="form-group">
+							<label class="control-label err-msg">{{user.errMsg}}</label>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" ng-click="addSupervisor()">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,384 @@
+<div class="designer-info-page common">
+	<div class="userInfo row">
+		<div class="panel panel-info ng-scope panel-common">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title">设计师基本基本资料信息</h3>
+			</div>
+			<div class="panel-body table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td class="col-md-4">用户Id</td>
+							<td>{{user._id}}</td>
+						</tr>
+
+						<tr>
+							<td>注册时间</td>
+							<td>{{user.create_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						</tr>
+
+						<tr>
+							<td>姓名</td>
+							<td>{{user.username}}</td>
+						</tr>
+
+						<tr>
+							<td>性别</td>
+							<td>{{user.sex | sexFilter}}</td>
+						</tr>
+
+						<tr>
+							<td>电话</td>
+							<td>{{user.phone}}</td>
+						</tr>
+
+						<tr>
+							<td>所在地区</td>
+							<td>{{user.province ? user.province : '未填写'}} {{user.city}} {{user.district}}</td>
+						</tr>
+
+						<tr>
+							<td>邮寄地址</td>
+							<td>{{user.address ? user.address : '未填写'}}</td>
+						</tr>
+
+						<tr>
+							<td>电子邮箱</td>
+							<td>{{user.email ? user.email : '未认证'}}</td>
+						</tr>
+
+						<tr>
+							<td>身份证号码</td>
+							<td>{{user.uid}}</td>
+						</tr>
+
+						<tr>
+							<td>毕业学校</td>
+							<td>{{user.university}}</td>
+						</tr>
+
+						<tr>
+							<td>学历照片</td>
+							<td>
+								<img-url data="user.diploma_imageid"></img-url>
+							</td>
+						</tr>
+
+						<tr>
+							<td>工作年限</td>
+							<td>{{user.work_year}} 年</td>
+						</tr>
+
+						<tr>
+							<td>曾就职装饰公司</td>
+							<td>{{user.company}}</td>
+						</tr>
+
+						<tr>
+							<td>设计理念</td>
+							<td>{{user.philosophy}}</td>
+						</tr>
+
+						<tr>
+							<td>设计成就</td>
+							<td>{{user.achievement}}</td>
+						</tr>
+
+						<tr>
+							<td>获奖照片和描述</td>
+							<td class="img-list">
+								<div ng-repeat="image in user.award_details">
+									<img-url data="image.award_imageid"></img-url>
+									<p class="lead">{{image.description}}</p>
+								</div>
+
+								<div ng-if="user.award_details.length === 0">
+									<img-url data=""></img-url>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<td>小头像</td>
+							<td>
+								<img-url data="user.imageid" width="800"></img-url>
+							</td>
+						</tr>
+
+						<tr>
+							<td>大头像</td>
+							<td>
+								<img-url data="user.big_imageid"></img-url>
+							</td>
+						</tr>
+
+						<tr>
+							<td>认证时间</td>
+							<td>{{user.auth_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						</tr>
+
+						<tr>
+							<td>当前认证状态</td>
+							<td>{{user.auth_type | authTypeFilter}}</td>
+						</tr>
+
+						<tr>
+							<td>认证审核信息</td>
+							<td>{{user.auth_message}}</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-info ng-scope panel-common">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title">设计师接单服务信息</h3>
+			</div>
+			<div class="panel-body table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>接单状态</td>
+							<td>{{user.online_status == 0 ? '在线' : '离线'}}</td>
+						</tr>
+
+						<tr>
+							<td>装修类别（最少1项）</td>
+							<td>
+								<p>
+									<span ng-repeat="m in user.dec_types track by $index"> {{ m | decTypeFilter}} </span>
+								</p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>擅长风格（最多3项）</td>
+							<td>
+								<p>
+									<span ng-repeat="n in user.dec_styles track by $index"> {{ n | decStyleFilter}} </span>
+								</p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>接单区域（最少1项）</td>
+							<td>
+								<p>
+									<span ng-repeat="k in user.dec_districts track by $index"> {{ k }} </span>
+								</p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>设计费报价（元/m²）</td>
+							<td>{{user.design_fee_range | designFeeRangeFilter}}</td>
+						</tr>
+
+						<tr>
+							<td>施工费报价（元/m²）</td>
+							<td>
+								<p>半包 <u>{{user.dec_fee_half | currency:'￥'}} </u> 元以上 全包 <u>{{user.dec_fee_all | currency:'￥'}}</u> 元以上</p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>习惯沟通方式</td>
+							<td>{{user.communication_type | designTypeFilter}}</td>
+						</tr>
+
+						<tr>
+							<td>意向接单户型（最少1项）</td>
+							<td>
+								<p>
+									<span ng-repeat="k in user.dec_house_types"> {{ k | houseTypeFilter}} </span>
+								</p>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-info ng-scope panel-common">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title">设计师身份认证和银行卡信息</h3>
+			</div>
+			<div class="panel-body table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td class="col-md-4">真实姓名</td>
+							<td>{{user.realname}}</td>
+						</tr>
+
+						<tr>
+							<td>身份证号码</td>
+							<td>
+								<img-url data="user.uid_image1"></img-url>
+							</td>
+						</tr>
+
+						<tr>
+							<td>身份证正面</td>
+							<td>
+								<img-url data="user.uid_image2"></img-url>
+							</td>
+						</tr>
+
+						<tr>
+							<td>身份证反面</td>
+							<td>{{user.sex | sexFilter}}</td>
+						</tr>
+
+						<tr>
+							<td>银行</td>
+							<td>{{user.bank}}</td>
+						</tr>
+
+						<tr>
+							<td>卡号</td>
+							<td>{{user.bank_card}}</td>
+						</tr>
+
+						<tr>
+							<td>银行卡照片</td>
+							<td>
+								<img-url data="user.bank_img1"></img-url>
+							</td>
+						</tr>
+
+						<tr>
+							<td>认证时间</td>
+							<td>{{user.uid_auth_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						</tr>
+
+						<tr>
+							<td>当前认证状态</td>
+							<td>{{user.uid_auth_type | authTypeFilter}}</td>
+						</tr>
+
+						<tr>
+							<td>认证审核信息</td>
+							<td>{{user.uid_auth_message}}</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-info ng-scope panel-common">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title">设计师实地认证信息</h3>
+			</div>
+			<div class="panel-body table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td class="col-md-4">认证时间</td>
+							<td>{{user.work_auth_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						</tr>
+
+						<tr>
+							<td>当前认证状态</td>
+							<td>{{user.work_auth_type | authTypeFilter}}</td>
+						</tr>
+
+						<tr>
+							<td>认证审核信息</td>
+							<td>{{user.work_auth_message}}</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-info ng-scope panel-common">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title">设计师邮箱认证信息</h3>
+			</div>
+			<div class="panel-body table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td class="col-md-4">电子邮箱</td>
+							<td>{{user.email}}</td>
+						</tr>
+
+						<tr>
+							<td>认证时间</td>
+							<td>{{user.email_auth_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						</tr>
+
+						<tr>
+							<td>当前认证状态</td>
+							<td>{{user.email_auth_type | authTypeFilter}}</td>
+						</tr>
+						
+						<tr>
+							<td>认证审核信息</td>
+							<td>{{user.email_auth_message}}</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-info ng-scope panel-common">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title">设计师其他信息</h3>
+			</div>
+			<div class="panel-body table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td class="col-md-4">作品数</td>
+							<td>
+								<p>总作品数{{user.product_count ? user.product_count : '0'}}，通过审核作品数{{user.authed_product_count ? user.authed_product_count : '0'}}，未通过审核作品数{{user.product_count - user.authed_product_count}}</p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>预约数</td>
+							<td>{{user.order_count ? user.order_count : '0'}}</td>
+						</tr>
+
+						<tr>
+							<td>成交数</td>
+							<td>{{user.deal_done_count ? user.deal_done_count : '0'}}</td>
+						</tr>
+						
+						<tr>
+							<td>施工团队个数</td>
+							<td>{{user.team_count ? user.team_count : '0'}}</td>
+						</tr>
+
+						<tr>
+							<td>个人主页预览数</td>
+							<td>{{user.view_count ? user.view_count : '0'}}</td>
+						</tr>
+
+						<tr>
+							<td>入驻协议</td>
+							<td>{{user.agreee_license == '1' ? '同意' : '不同意'}}</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<!-- <a ui-sref="product(getProductDetail(user))" class="btn btn-primary">前往设计师作品列表</a> -->
+			<a ng-click="getProductDetail(user)" class="btn btn-primary">前往设计师作品列表</a>
+			<a ui-sref="designerTeamList({id:user._id})" class="btn btn-info">前往设计师施工团队列表</a>
+			<a href="{{('/tpl/designer/' + user._id) | pcUrl}}" target="_blank" class="btn btn-warning">前往设计师个人主页</a>
+		</div>
+
+	</div>
+</div>

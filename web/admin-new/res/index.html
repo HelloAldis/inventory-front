@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="JfjAdmin" ng-controller="topCtrl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title ng-bind="title"></title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
+
+    <!-- build:css css/app-vender.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css">
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css">
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-select/dist/css/bootstrap-select.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="bower_components/angular-progress-button-styles/dist/angular-progress-button-styles.min.css">
+    <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeSlider.css">
+    <link rel="stylesheet" href="bower_components/ionrangeslider/css/ion.rangeSlider.skinFlat.css">
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
+    <!-- endinject -->
+    <link rel="stylesheet" href="lib/webuploader/webuploader.css"/>
+    <!-- endbuild -->
+
+    <!-- build:css css/app.css -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
+    <!-- app:css -->
+    <link rel="stylesheet" href="app/pages/common.css">
+    <link rel="stylesheet" href="app/components/imgUrl/imgUrl.css">
+    <link rel="stylesheet" href="app/components/loadData/loadData.css">
+    <link rel="stylesheet" href="app/pages/designer/designer.css">
+    <link rel="stylesheet" href="app/pages/field/field.css">
+    <link rel="stylesheet" href="app/pages/index/index.css">
+    <link rel="stylesheet" href="app/pages/live/live.css">
+    <link rel="stylesheet" href="app/pages/notify/notify.css">
+    <link rel="stylesheet" href="app/pages/image/image.css">
+    <link rel="stylesheet" href="app/pages/requirement/requirement.css">
+    <link rel="stylesheet" href="app/pages/user/user.css">
+    <link rel="stylesheet" href="app/theme/components/pageTop/pageTop.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+  <body>
+    <div class="body-bg"></div>
+    <main ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+
+      <ba-sidebar></ba-sidebar>
+      <page-top></page-top>
+
+      <div class="al-main">
+        <div class="al-content">
+          <content-top></content-top>
+          <div ui-view></div>
+        </div>
+      </div>
+
+      <footer class="al-footer clearfix">
+        <div class="al-footer-right">简繁家 Admin 2016 Created by Aldis<i class="ion-nuclear"></i>, Karos<i class="ion-ios-flag"></i>, Vivi<i class="ion-ios-flag"></i>, Tested by Hank<i class="ion-ios-flag"></i>
+        </div>
+      </footer>
+
+      <back-top></back-top>
+    </main>
+
+    <!-- build:js js/app-vender.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/jquery.easing/js/jquery.easing.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/slimScroll/jquery.slimscroll.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-slimscroll/angular-slimscroll.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+    <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
+    <script src="bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+    <script src="bower_components/angular-progress-button-styles/dist/angular-progress-button-styles.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionrangeslider/js/ion.rangeSlider.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="bower_components/angular-ueditor/dist/angular-ueditor.min.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <!-- endinject -->
+    <script src="lib/tdist.js"></script>
+    <script src="lib/ueditor/ueditor.config.js"></script>
+    <script src="lib/ueditor/ueditor.all.min.js"></script>
+    <script src="lib/webuploader/webuploader.html5only.min.js"></script>
+    <script src="lib/table2CSV.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js js/app.js -->
+    <!-- app:js -->
+    <script src="app/filters/filters.module.js"></script>
+    <script src="app/components/components.module.js"></script>
+    <script src="app/pages/pages.module.js"></script>
+    <script src="app/services/services.module.js"></script>
+    <script src="app/theme/theme.module.js"></script>
+    <script src="app/pages/chart/chart.module.js"></script>
+    <script src="app/pages/comment/comment.module.js"></script>
+    <script src="app/pages/designer/designer.module.js"></script>
+    <script src="app/pages/feedback/feedback.module.js"></script>
+    <script src="app/pages/diary/diary.module.js"></script>
+    <script src="app/pages/field/field.module.js"></script>
+    <script src="app/pages/index/index.module.js"></script>
+    <script src="app/pages/live/live.module.js"></script>
+    <script src="app/pages/news/news.module.js"></script>
+    <script src="app/pages/notify/notify.module.js"></script>
+    <script src="app/pages/pictures/pictures.module.js"></script>
+    <script src="app/pages/quotation/quotation.module.js"></script>
+    <script src="app/pages/image/image.module.js"></script>
+    <script src="app/pages/product/product.module.js"></script>
+    <script src="app/pages/recruit/recruit.module.js"></script>
+    <script src="app/pages/requirement/requirement.module.js"></script>
+    <script src="app/pages/supervisor/supervisor.module.js"></script>
+    <script src="app/pages/user/user.module.js"></script>
+    <script src="app/pages/survey/survey.module.js"></script>
+    <script src="app/pages/plan/plan.module.js"></script>
+    <script src="app/theme/components/components.module.js"></script>
+    <script src="app/pages/chart/designerChart/designerChart.module.js"></script>
+    <script src="app/pages/chart/productChart/productChart.module.js"></script>
+    <script src="app/pages/chart/requirementChart/requirementChart.module.js"></script>
+    <script src="app/pages/chart/userChart/userChart.module.js"></script>
+    <script src="app/pages/notify/designerNotify/designerNotify.module.js"></script>
+    <script src="app/pages/notify/userNotify/userNotify.module.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/index.controller.js"></script>
+    <script src="app/filters/type.filter.js"></script>
+    <script src="app/services/api.js"></script>
+    <script src="app/services/constant.js"></script>
+    <script src="app/services/util.js"></script>
+    <script src="app/theme/theme.config.js"></script>
+    <script src="app/theme/theme.configProvider.js"></script>
+    <script src="app/theme/theme.constants.js"></script>
+    <script src="app/theme/theme.run.js"></script>
+    <script src="app/theme/theme.service.js"></script>
+    <script src="app/components/dateRangePicker/dateRangePicker.directive.js"></script>
+    <script src="app/components/imgUrl/imgUrl.directive.js"></script>
+    <script src="app/components/dropdown/kvDropdown.directive.js"></script>
+    <script src="app/components/dropdown/strDropdown.directive.js"></script>
+    <script src="app/components/exportData/exportData.directive.js"></script>
+    <script src="app/components/myCity/myCities.directive.js"></script>
+    <script src="app/components/loadData/loadData.directive.js"></script>
+    <script src="app/components/loadData/noData.directive.js"></script>
+    <script src="app/components/searchInput/searchInput.directive.js"></script>
+    <script src="app/components/uploadImage/uploadImage.directive.js"></script>
+    <script src="app/components/tagsInput/tagsInput.directive.js"></script>
+    <script src="app/pages/comment/comment.controller.js"></script>
+    <script src="app/pages/designer/designer.controller.js"></script>
+    <script src="app/pages/designer/designerEditor.controller.js"></script>
+    <script src="app/pages/designer/designerIdAuth.controller.js"></script>
+    <script src="app/pages/designer/designerInfo.controller.js"></script>
+    <script src="app/pages/designer/designerInfoAuth.controller.js"></script>
+    <script src="app/pages/designer/designerTeamEditor.controller.js"></script>
+    <script src="app/pages/designer/designerTeamList.controller.js"></script>
+    <script src="app/pages/designer/designerWorkAuth.controller.js"></script>
+    <script src="app/pages/feedback/feedbackList.controller.js"></script>
+    <script src="app/pages/diary/diary.controller.js"></script>
+    <script src="app/pages/field/fieldDetail.controller.js"></script>
+    <script src="app/pages/field/fieldList.controller.js"></script>
+    <script src="app/pages/index/index.controller.js"></script>
+    <script src="app/pages/live/live.controller.js"></script>
+    <script src="app/pages/live/liveAdd.controller.js"></script>
+    <script src="app/pages/live/liveEditor.controller.js"></script>
+    <script src="app/pages/live/liveUpdate.controller.js"></script>
+    <script src="app/pages/news/newsAdd.controller.js"></script>
+    <script src="app/pages/news/newsList.controller.js"></script>
+    <script src="app/pages/pictures/pictureAdd.controller.js"></script>
+    <script src="app/pages/pictures/pictureList.controller.js"></script>
+    <script src="app/pages/quotation/quotation.controller.js"></script>
+    <script src="app/pages/image/image.controller.js"></script>
+    <script src="app/pages/product/product.controller.js"></script>
+    <script src="app/pages/recruit/recruitList.controller.js"></script>
+    <script src="app/pages/requirement/requirement.controller.js"></script>
+    <script src="app/pages/requirement/requirementDetail.controller.js"></script>
+    <script src="app/pages/requirement/requirementEditor.controller.js"></script>
+    <script src="app/pages/supervisor/supervisor.controller.js"></script>
+    <script src="app/pages/user/user.controller.js"></script>
+    <script src="app/pages/user/userAddRequirement.controller.js"></script>
+    <script src="app/pages/user/userEditor.controller.js"></script>
+    <script src="app/pages/user/userInfo.controller.js"></script>
+    <script src="app/pages/user/userRequirement.controller.js"></script>
+    <script src="app/pages/survey/surveyDetail.controller.js"></script>
+    <script src="app/pages/survey/surveyList.controller.js"></script>
+    <script src="app/pages/plan/plans.controller.js"></script>
+    <script src="app/theme/components/toastrLibConfig.js"></script>
+    <script src="app/theme/directives/animatedChange.js"></script>
+    <script src="app/theme/directives/autoExpand.js"></script>
+    <script src="app/theme/directives/autoFocus.js"></script>
+    <script src="app/theme/directives/includeWithScope.js"></script>
+    <script src="app/theme/directives/ionSlider.js"></script>
+    <script src="app/theme/directives/ngFileSelect.js"></script>
+    <script src="app/theme/directives/scrollPosition.js"></script>
+    <script src="app/theme/directives/trackWidth.js"></script>
+    <script src="app/theme/directives/zoomIn.js"></script>
+    <script src="app/theme/services/baUtil.js"></script>
+    <script src="app/theme/services/fileReader.js"></script>
+    <script src="app/theme/services/preloader.js"></script>
+    <script src="app/theme/services/stopableInterval.js"></script>
+    <script src="app/pages/chart/designerChart/designerChart.controller.js"></script>
+    <script src="app/pages/chart/productChart/productChart.controller.js"></script>
+    <script src="app/pages/chart/requirementChart/requirementChart.controller.js"></script>
+    <script src="app/pages/chart/userChart/userChart.controller.js"></script>
+    <script src="app/pages/notify/designerNotify/designerNotify.controller.js"></script>
+    <script src="app/pages/notify/userNotify/userNotify.controller.js"></script>
+    <script src="app/theme/components/backTop/backTop.directive.js"></script>
+    <script src="app/theme/components/baPanel/baPanel.directive.js"></script>
+    <script src="app/theme/components/baPanel/baPanel.service.js"></script>
+    <script src="app/theme/components/baPanel/baPanelBlur.directive.js"></script>
+    <script src="app/theme/components/baPanel/baPanelBlurHelper.service.js"></script>
+    <script src="app/theme/components/baPanel/baPanelSelf.directive.js"></script>
+    <script src="app/theme/components/baWizard/baWizard.directive.js"></script>
+    <script src="app/theme/components/baWizard/baWizardCtrl.js"></script>
+    <script src="app/theme/components/baWizard/baWizardStep.directive.js"></script>
+    <script src="app/theme/components/baSidebar/baSidebar.directive.js"></script>
+    <script src="app/theme/components/baSidebar/baSidebar.service.js"></script>
+    <script src="app/theme/components/baSidebar/BaSidebarCtrl.js"></script>
+    <script src="app/theme/components/baSidebar/baSidebarHelpers.directive.js"></script>
+    <script src="app/theme/components/contentTop/contentTop.directive.js"></script>
+    <script src="app/theme/components/msgCenter/msgCenter.directive.js"></script>
+    <script src="app/theme/components/msgCenter/MsgCenterCtrl.js"></script>
+    <script src="app/theme/components/pageTop/pageTop.directive.js"></script>
+    <script src="app/theme/components/widgets/widgets.directive.js"></script>
+    <script src="app/theme/filters/image/appImage.js"></script>
+    <script src="app/theme/filters/image/kameleonImg.js"></script>
+    <script src="app/theme/filters/image/profilePicture.js"></script>
+    <script src="app/theme/filters/text/removeHtml.js"></script>
+    <script src="app/theme/components/backTop/lib/jquery.backTop.min.js"></script>
+    <!-- endinject -->
+
+    <!-- templates:js -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+  </body>
+</html>

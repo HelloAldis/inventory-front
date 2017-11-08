@@ -1,0 +1,11 @@
+<div class="row" ng-keyup="myKeyup($event, config.search_word)"">
+	<div class="col-md-6">
+		<div class="input-group ng-scope">
+			<input type="text" name="searchContent" class="form-control" ng-model="config.search_word" placeholder="{{config.placeholder}}" required />
+			<span class="input-group-btn">
+				<button type="submit" class="btn btn-primary search-btn" ng-click="search(config.search_word)">搜索</button>
+				<button class="btn btn-danger clear-btn" type="button" ng-click="clearStatus()">重置</button>
+			</span>
+		</div>
+	</div>
+</div>

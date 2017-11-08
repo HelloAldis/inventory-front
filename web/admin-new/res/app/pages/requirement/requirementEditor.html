@@ -1,0 +1,71 @@
+<div class="requirement-editor-page">
+  <form>
+    <div class="form-group">
+      <label for="exampleInputPassword1">装修城市：</label>
+      <my-cities my-province="requirement.province" my-city="requirement.city" my-district="requirement.district" />
+    </div>
+    <div class="form-group">
+      <label for="message-phone" class="control-label">小区名称:</label>
+      <input type="text" class="form-control"  ng-model="requirement.basic_address">
+    </div>
+    <div class="form-group">
+      <label for="message-phone" class="control-label">详细地址:</label>
+      <input type="text" class="form-control" ng-model="requirement.detail_address">
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">装修类型:</label>
+      <kv-dropdown curkey="requirement.dec_type" keyval="id:name" opts="dec_type">
+      </kv-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">户型:</label>
+      <kv-dropdown curkey="requirement.house_type" keyval="id:name" opts="house_type">
+      </kv-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">包工类型:</label>
+      <kv-dropdown curkey="requirement.work_type" keyval="id:name" opts="work_type">
+      </kv-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">包类型:</label>
+      <kv-dropdown curkey="requirement.package_type" keyval="num:name" opts="package_type">
+      </kv-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">计划常住成员:</label>
+      <kv-dropdown curkey="requirement.family_description" keyval="num:name" opts="family_description">
+      </kv-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">建筑面积(m²):</label>
+      <input type="text" class="form-control" ng-model="requirement.house_area"
+        placeholder="请填写整数" required>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">风格喜好:</label>
+      <kv-dropdown curkey="requirement.dec_style" keyval="num:txt" opts="dec_style">
+      </kv-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">装修预算(万元):</label>
+      <input type="text" class="form-control" ng-model="requirement.total_price"
+        placeholder="请填写整数" required>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">偏好设计师性别:</label>
+      <kv-dropdown curkey="requirement.prefer_sex" keyval="num:name" opts="prefer_sex">
+      </kv-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="message-name" class="control-label">偏好设计师类型:</label>
+      <kv-dropdown curkey="requirement.communication_type" keyval="id:name" opts="communication_type">
+      </kv-dropdown>
+    </div>
+    <div class="form-group">
+      <label class="control-label err-msg">{{requirement.errMsg}}</label>
+    </div>
+  </form>
+
+  <button type="submit" class="btn btn-primary" ng-click="updateUserRequirement()">确认提交</button>
+</div>

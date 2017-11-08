@@ -1,0 +1,44 @@
+<div class="row live-page common">
+	<div class="panel panel-info ng-scope text-center table-responsive">
+		<table class="table table-bordered table-striped">
+			<tbody>
+				<tr class="info thead text-nowrap">
+					<th>
+						<div ng-class="{'-1':'tablesorter-headerDesc item-width',
+							undefined:'tablesorter-header item-width',
+							'1':'tablesorter-headerAsc item-width'}[sort.start_at]" ng-click="sortData('start_at')">直播时间&nbsp;&nbsp;</div>
+					</th>
+					<th class="text-center">项目名称</th>
+					<th class="text-center">当前状态</th>
+					<th class="text-center">设计师</th>
+					<th class="text-center">项目经理</th>
+					<th class="text-center">管理员操作</th>
+				</tr>
+				<tr ng-repeat="live in liveList" class="text-nowrap">
+					<td class="text-left">{{live.start_at | date:'yyyy-MM-dd'}}</td>
+					<td>{{live.cell}}</td>
+					<td>{{live.process[live.process.length-1].name | processFilter}}</td>
+					<td>{{live.designer.username}}</td>
+					<td>{{live.manager}}</td>
+					<td class="td-opt">
+						<a href="{{('/tpl/live/detail.html?' + live._id) | pcUrl}}" target="_blank">查看</a> |
+						<a ui-sref="liveEditor({id:live._id})">编辑</a> |
+						<a ui-sref="liveUpdate({id:live._id})">更新</a> |
+						<a ng-click="deleteLive(live._id)">删除</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<load-data ng-hide="loading.loadData"></load-data>
+		<no-data ng-if="loading.notData"></no-data>
+	</div>
+	
+	<div class="text-center" ng-if="loading.loadData && !loading.notData">
+		<uib-pagination total-items="pagination.totalItems" first-text="首页" next-text="下一页" previous-text="上一页" last-text="尾页" ng-model="pagination.currentPage" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" rotate="false" ng-change="pagination.pageChanged()"></uib-pagination>
+		<span class="pagecode">当前：{{pagination.currentPage}} / {{numPages}} 页 总共 {{pagination.totalItems}} 条数据</span>
+	</div>
+	<div class="col-md-12">
+		<div export-data class="hidden-xs"></div>
+		<a class="btn btn-primary btn-sm" ui-sref="liveAdd">创建装修直播</a>
+	</div>
+</div>

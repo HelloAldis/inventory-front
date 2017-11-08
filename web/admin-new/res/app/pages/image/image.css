@@ -1,0 +1,4 @@
+.image-page table .img-info-list td{
+	display: table-cell;
+	vertical-align: middle;
+}

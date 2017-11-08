@@ -1,0 +1,30 @@
+<div class="panel panel-info ng-scope">
+	<table class="table table-bordered table-striped">
+		<tbody>
+			<tr class="info thead">
+				<th>项目经理姓名</th>
+				<th>身份证号码</th>
+				<th>性别</th>
+				<th>所在地区</th>
+				<th>曾就职装饰公司</th>
+				<th>从业年限</th>
+				<th>擅长工种</th>
+				<th>正在施工工地</th>
+				<th>操作</th>
+			</tr>
+			<tr ng-repeat="user in userList">
+				<td>{{user.manager}}</td>
+				<td>{{user.uid}}</td>
+				<td>{{user.sex | sexFilter}}</td>
+				<td>{{user.province ? user.province : '未填写'}} {{user.city}} {{user.district}}</td>
+				<td>{{user.company}}</td>
+				<td>{{user.work_year}}</td>
+				<td>{{user.good_at}}</td>
+				<td>{{user.working_on}}</td>
+				<td>
+					<a ui-sref="designerEditorTeam({id:user._id})">编辑</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

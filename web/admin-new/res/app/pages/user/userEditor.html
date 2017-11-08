@@ -1,0 +1,54 @@
+<form>
+	<div class="box col-md-12">
+		<ol class="breadcrumb">
+			<li><a ui-sref="index">首页</a></li>
+			<li><a ui-sref="user">业主列表</a></li>
+			<li class="active">业主详细资料</li>
+		</ol>
+	</div>
+
+	<div class="form-group">
+		<label for="">手机号：</label>
+		<input type="text" class="form-control" ng-model="user.phone" ng-disabled="checked" placeholder="请输入用户手机号">
+	</div>
+	<div class="form-group">
+		<label for="">用户姓名：</label>
+		<input type="text" class="form-control" ng-model="user.username" placeholder="请输入用户姓名">
+	</div>
+
+	<div class="form-group">
+		<label>上传用户头像</label>
+		<upload-image id="upload1" ids="[user.imageid]" max-image-count="1" uploader="uploader1">
+			<upload-image>
+	</div>
+	<div class="form-group">
+		<label for="">性别：</label>
+		<kv-dropdown curkey="user.sex" keyval="id:name" opts="userSex">
+		</kv-dropdown>
+	</div>
+	<div class="form-group">
+		<label for="">所在地区：</label>
+		<my-cities my-province="user.province" my-city="user.city" my-district="user.district" ng-if="user" />
+	</div>
+	<div class="form-group">
+		<label for="">邮寄地址：</label>
+		<input type="text" class="form-control" ng-model="user.address" placeholder="请输入邮寄地址">
+	</div>
+	<div class="form-group">
+		<label for="">电子邮箱：</label>
+		<input type="text" class="form-control" ng-model="user.email" placeholder="请输电子邮箱">
+	</div>
+	<div class="form-group">
+		<label for="exampleInputPassword1">风格喜好：</label>
+		<kv-dropdown curkey="user.dec_styles" keyval="num:txt" opts="decStyle">
+		</kv-dropdown>
+	</div>
+	<div class="form-group">
+		<label for="exampleInputPassword1">装修阶段：</label>
+		<kv-dropdown curkey="user.dec_progress" keyval="id:name" opts="decProgress">
+		</kv-dropdown>
+	</div>
+
+	<button type="button" class="btn btn-success" ng-click="editorUser()">提交修改</button>
+
+</form>

@@ -1,0 +1,63 @@
+<ol class="breadcrumb"><li><a ui-sref="index">首页</a></li><li><a ui-sref="pictures">装修美图</a></li><li class="active">编辑美图</li></ol>
+<div class="">
+	<form name="pictures" class="form-horizontal" ng-submit="picturesSubmit()" novalidate>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">美图标题<br />（20汉字以内）</label>
+		   <div class="col-sm-11">
+		     <input type="text" class="form-control" ng-model="images.title" required ng-maxlenght="20" />
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">美图关键字<br />（用"|"隔开）</label>
+		   <div class="col-sm-11">
+		     <input type="text" class="form-control" ng-model="images.keywords" required />
+		   </div>
+		</div>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">美图描述</label>
+		   <div class="col-sm-11">
+		   	 <textarea class="form-control" rows="3" ng-model="images.description" required></textarea>
+		   </div>
+		</div>
+		<div class="form-group">
+		  <label for="inputEmail3" class="col-sm-1 control-label">装修户型：</label>
+		  <div class="col-sm-11">
+				<kv-dropdown curkey="images.house_type" keyval="num:name" opts="house_type">
+				</kv-dropdown>
+			</div>
+		</div>
+		<div class="form-group">
+		  <label for="inputEmail3" class="col-sm-1 control-label">装修风格：</label>
+		  <div class="col-sm-11">
+			<kv-dropdown curkey="images.dec_style" keyval="num:name" opts="dec_style">
+			</kv-dropdown>
+		</div>
+		</div>
+		<div class="form-group">
+		  <label for="inputEmail3" class="col-sm-1 control-label">装修类型：</label>
+		  <div class="col-sm-11">
+				<kv-dropdown curkey="images.dec_type" keyval="num:name" opts="dec_type">
+				</kv-dropdown>
+			</div>
+		</div>
+		<div class="form-group">
+		  <label for="inputEmail3" class="col-sm-1 control-label">空间：</label>
+		  <div class="col-sm-11">
+				<str-dropdown curopt="images.section" opts="section">
+				</str-dropdown>
+			</div>
+		</div>
+		<div class="form-group">
+		   <label for="inputEmail3" class="col-sm-1 control-label">美图图片上传</label>
+		   <div class="col-sm-11">
+					<upload-image id="upload1" ids="ids" max-image-count="1" uploader="uploader1"><upload-image>
+		   </div>
+		</div>
+		<div class="form-group">
+		    <div class="col-sm-offset-1 col-sm-11">
+		      <button type="submit" class="btn btn-success" ng-disabled="pictures.$invalid">确定</button>
+		      <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+		    </div>
+		  </div>
+	</form>
+</div>

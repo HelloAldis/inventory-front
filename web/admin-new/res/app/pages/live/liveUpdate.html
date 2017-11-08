@@ -1,0 +1,29 @@
+<form>
+  <div class="form-group">
+    <label for="">当前阶段：</label>
+    <select class="form-control" ng-model="process.processName">
+      <option ng-repeat="v in dec_flow" ng-selected="process.processName == v.num" value="{{v.num}}">{{ v.name }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="">当前开始时间：</label>
+    <p class="input-group" style="width:50%">
+      <input type="text" class="form-control" uib-datepicker-popup ng-model="process.processDate" is-open="processTime.status.opened" datepicker-options="processTime.dateOptions" close-text="关闭" clear-text="清除" current-text="今天" required />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="processTime.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+  </div>
+  <div class="form-group">
+    <label for="">上传装修效果图：*作品上传每张大小为3M以内jpeg/jpg/png格式图片,为了作品显示效果最佳，保证更张图宽度在900-1200之间。</label>
+    <upload-image id="upload1" max-image-count="9" uploader="uploader1"><upload-image>
+  </div>
+   <div class="form-group">
+    <label for="">当前阶段描述：</label>
+    <textarea class="form-control" rows="3" ng-model="process.processDescription" placeholder="请输入当前阶段描述"></textarea>
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-success" ng-click="upDataLive()">更新装修直播</button>
+    <button type="button" class="btn btn-danger" ng-click="deleteLive()">删除当前阶段</button>
+  </div>
+</form>

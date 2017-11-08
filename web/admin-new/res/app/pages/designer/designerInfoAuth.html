@@ -1,0 +1,123 @@
+<div class="designer-info-auth-page common">
+	<div class="userInfo row">
+		<div class="panel panel-info ng-scope panel-common">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title">设计师基本认证</h3>
+			</div>
+			<div class="panel-body table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td  class="col-md-4">用户Id</td>
+							<td>{{user.province}} {{user.city}} {{user.district}}</td>
+						</tr>
+
+						<tr>
+							<td>注册时间</td>
+							<td>{{user.create_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						</tr>
+
+						<tr>
+							<td>姓名</td>
+							<td>{{user.username}}</td>
+						</tr>
+
+						<tr>
+							<td>性别</td>
+							<td>{{user.sex | sexFilter}}</td>
+						</tr>
+
+						<tr>
+							<td>电话</td>
+							<td>{{user.phone}}</td>
+						</tr>
+
+						<tr>
+							<td>所在地区</td>
+							<td>{{user.province ? user.province : '未填写'}} {{user.city}} {{user.district}}</td>
+						</tr>
+
+						<tr>
+							<td>邮寄地址</td>
+							<td>{{user.address ? user.address : '未填写'}}</td>
+						</tr>
+
+						<tr>
+							<td>电子邮箱</td>
+							<td>{{user.email ? user.email : '未认证'}}</td>
+						</tr>
+
+						<tr>
+							<td>毕业学校</td>
+							<td>{{user.university}}</td>
+						</tr>
+
+						<tr>
+							<td>学历照片</td>
+							<td>
+								<img-url data="user.diploma_imageid"></img-url>
+							</td>
+						</tr>
+
+						<tr>
+							<td>工作年限</td>
+							<td>{{user.work_year}} 年</td>
+						</tr>
+
+						<tr>
+							<td>曾就职装饰公司</td>
+							<td>{{user.company}}</td>
+						</tr>
+
+						<tr>
+							<td>设计理念</td>
+							<td>{{user.philosophy}}</td>
+						</tr>
+
+						<tr>
+							<td>设计成就</td>
+							<td>{{user.achievement}}</td>
+						</tr>
+
+						<tr>
+							<td>获奖照片和描述</td>
+							<td class="img-list">
+								<div ng-repeat="image in user.award_details">
+									<img-url data="image.award_imageid"></img-url>
+									<p class="lead">{{image.description}}</p>
+								</div>
+
+								<div ng-if="user.award_details.length === 0">
+									<img-url data=""></img-url>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<td>小头像</td>
+							<td>
+								<img-url data="user.imageid"></img-url>
+							</td>
+						</tr>
+
+						<tr>
+							<td>背景图</td>
+							<td>
+								<img-url data="user.big_imageid"></img-url>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label for="">未认证通过原因(注：审核通过不需要填写)</label>
+			<textarea class="form-control" ng-model="errorMsg" rows="3"></textarea>
+		</div>
+		<div class="form-group col-md-12">
+			<button type="button" class="btn btn-success" ng-click="success(2)">审核通过</button>
+			<button type="button" class="btn btn-warning" ng-click="success(3)">审核失败</button>
+		</div>
+	</div>
+</div>

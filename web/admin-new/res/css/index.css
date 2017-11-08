@@ -1,0 +1,347 @@
+.btn-group > .btn {
+    font-size: 13px;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: #209e91;
+}
+
+/*城市插件*/
+.k-cities{
+	position: relative;
+	z-index: 20;
+	height: 34px;
+}
+.k-cities .tipsinfo{
+	line-height: 24px;
+    color: #d92222;
+}
+.k-cities .list{
+	position: relative;
+  z-index: 2;
+	float: left;
+	width: 230px;
+	margin-right: 15px;
+	text-align: left;
+}
+.k-cities .option{
+	overflow: hidden;
+	height: 32px;
+	line-height: 32px;
+	position: relative;
+	cursor: pointer;
+	padding:0 20px 0 10px;
+	background-color: #209e91;
+	border: 1px solid transparent;
+	border-radius: 5px;
+}
+.k-cities .option .value{
+	font-size: 13px;
+	color: #fff;
+}
+.k-cities .arrow{
+	position: absolute;
+	top:9px;
+	right:15px;
+	background-color: #fff;
+}
+.k-cities .arrow em,.k-cities .arrow i{
+	position: absolute;
+	left:0;
+	top:0;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-width: 5px;
+	border-color: transparent;
+	border-style: dashed;
+	border-top-style: solid;
+	border-top-color: #fff;
+}
+.k-cities .arrow em{
+	top:3px;
+	border-top-color: #aaa;
+}
+.k-cities .arrow i{display: none;}
+.k-cities .select{
+	position: absolute;
+	left:0px;
+	top:32px;
+	width: 100%;
+	height: 210px;
+  padding: 0;
+	overflow-y: auto;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	border-top: none;
+	display: none;
+}
+.k-cities .select li{
+  list-style: none;
+  padding-left: 30px;
+}
+.k-cities .select li span{
+  margin-left: -20px;
+}
+.k-cities .select a{
+	line-height: 30px;
+  padding-left: 10px;
+	color: #262626;
+}
+.k-cities .select li:hover{
+	color:#262626;
+	background-color: #209e91;
+}
+.k-cities .open{
+	display: block;
+	z-index: 20;
+}
+
+.upload-image-container {
+    border: 1px solid #dadada;
+    color: #838383;
+    font-size: 12px;
+    margin-top: 10px;
+    background-color: #FFF;
+}
+
+.upload-image-container .queueList {
+    margin: 20px;
+}
+
+.upload-image-container .placeholder {
+    border: 3px dashed #e6e6e6;
+    min-height: 238px;
+    padding-top: 158px;
+    text-align: center;
+    background: url(../assets/img/theme/icon/kameleon/Images.svg) center 60px no-repeat;
+    color: #cccccc;
+    font-size: 18px;
+    position: relative;
+}
+
+.upload-image-container .element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+
+.upload-image-container .statusBar {
+    height: 63px;
+    border-top: 1px solid #dadada;
+    padding: 0 20px;
+    line-height: 63px;
+    vertical-align: middle;
+    position: relative;
+}
+
+.upload-image-container .statusBar .info {
+    display: inline-block;
+    font-size: 14px;
+    color: #666666;
+}
+
+.upload-image-container .filelist div.file-panel {
+    position: absolute;
+    height: 0;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#80000000', endColorstr='#80000000')\0;
+    background: rgba( 0, 0, 0, 0.5 );
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 300;
+}
+
+.upload-image-container .filelist div.file-panel i {
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+    display: inline;
+    float: right;
+    overflow: hidden;
+    margin: 5px 1px 1px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.upload-image-container .filelist div.file-panel i:hover {
+    color: #e85656;
+}
+
+.upload-image-container .filelist li p.imgWrap {
+    position: relative;
+    z-index: 2;
+    line-height: 110px;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 110px;
+    height: 110px;
+
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+
+    -webit-transition: 200ms ease-out;
+    -moz-transition: 200ms ease-out;
+    -o-transition: 200ms ease-out;
+    -ms-transition: 200ms ease-out;
+    transition: 200ms ease-out;
+}
+
+.upload-image-container .filelist li img {
+    width: 100%;
+}
+
+.upload-image-container .filelist li p.error {
+    background: #f43838;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 28px;
+    line-height: 28px;
+    width: 100%;
+    z-index: 100;
+}
+
+.upload-image-container .filelist li .success {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    z-index: 200;
+    background: url(../assets/img/success.png) no-repeat right bottom;
+}
+
+.upload-image-container .filelist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.upload-image-container .filelist:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.upload-image-container .filelist li {
+    width: 110px;
+    height: 110px;
+    text-align: center;
+    margin: 0 8px 20px 0;
+    position: relative;
+    display: inline;
+    float: left;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.upload-image-container .filelist li p.log {
+    position: relative;
+    top: -45px;
+}
+
+.upload-image-container .filelist li p.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow : ellipsis;
+    top: 5px;
+    text-indent: 5px;
+    text-align: left;
+}
+
+.upload-image-container .filelist li p.progress {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 8px;
+    overflow: hidden;
+    z-index: 50;
+}
+.upload-image-container .filelist li p.progress span {
+    display: none;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    background: #1483d8;
+
+    -webit-transition: width 200ms linear;
+    -moz-transition: width 200ms linear;
+    -o-transition: width 200ms linear;
+    -ms-transition: width 200ms linear;
+    transition: width 200ms linear;
+
+    -webkit-animation: progressmove 2s linear infinite;
+    -moz-animation: progressmove 2s linear infinite;
+    -o-animation: progressmove 2s linear infinite;
+    -ms-animation: progressmove 2s linear infinite;
+    animation: progressmove 2s linear infinite;
+
+    -webkit-transform: translateZ(0);
+}
+
+/* table sorter */
+.tablesorter-header {
+    background-image: url(../assets/img/sort-default.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+.tablesorter-headerNone {
+    background-image: none;
+}
+
+.tablesorter-headerAsc {
+    background-image: url(../assets/img/sort-asc.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+.tablesorter-headerDesc {
+    background-image: url(../assets/img/sort-desc.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+
+.auth-type-no {
+  color: #070707
+}
+.auth-type-ing {
+  color: #fe7004
+}
+.auth-type-ok {
+  color: #00cc00
+}
+.auth-type-reject {
+  color: #ff0000
+}
+.auth-type-bad {
+  color: #990000
+}
+
+/*分页*/
+.pagination{
+    vertical-align: middle;
+}
+.pagecode{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+}

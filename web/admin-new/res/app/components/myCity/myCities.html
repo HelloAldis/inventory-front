@@ -1,0 +1,37 @@
+<div>
+  <div class="k-cities">
+    <div class="list province" ng-mouseout="closeSelect()">
+        <div class="option" ng-click="open.province()">
+          <span class="value" ng-bind="myProvince"></span><span class="arrow"><em></em><i></i></span>
+        </div>
+        <ul class="select" ng-class="{'open':select.provinceShow}" ng-mouseover="closeTimer()">
+          <li data-val="{{ p.pid }}" ng-repeat="p in tdist.province track by p.cid" ng-click="select.province($index,p.name)">
+            <span ng-if="myProvince == p.name">✔&nbsp;</span>
+            <a ng-bind="p.name"></a>
+          </li>
+        </ul>
+    </div>
+    <div class="list city" ng-mouseout="closeSelect()">
+      <div class="option" ng-click="open.city()">
+        <span class="value" ng-bind="myCity"></span><span class="arrow"><em></em><i></i></span>
+      </div>
+      <ul class="select" ng-class="{'open':select.cityShow && myProvince !== '请选择省份'}" ng-mouseover="closeTimer()">
+        <li data-val="0" ng-repeat="c in tdist.city[index.province] track by c.cid"  ng-click="select.city($index,c.name)">
+          <span ng-if="myCity == c.name">✔&nbsp;</span>
+          <a ng-bind="c.name"></a>
+        </li>
+      </ul>
+    </div>
+    <div class="list district" ng-mouseout="closeSelect()">
+      <div class="option" ng-click="open.district()">
+        <span class="value" ng-bind="myDistrict"></span><span class="arrow"><em></em><i></i></span>
+      </div>
+      <ul class="select" ng-class="{'open':select.districtShow && myCity !== '请选择市'}" ng-mouseover="closeTimer()">
+        <li data-val="0" ng-repeat="d in tdist.district[index.province][index.city] track by d.cid"  ng-click="select.district($index,d.name)">
+          <span ng-if="myDistrict == d.name">✔&nbsp;</span>
+          <a ng-bind="d.name"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

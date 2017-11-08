@@ -1,0 +1,52 @@
+<form>
+	<div class="form-group">
+	    <label for="">项目经理：</label>
+	    <input type="text" class="form-control" ng-model="team.manager" placeholder="请输入名字">
+	</div>
+	<div class="form-group">
+	    <label for="">性别：</label>
+	    <div my-select my-list="teamSexs" my-query="team.sex"></div>
+	</div>
+	<div class="form-group">
+	    <label for="">所在地区：</label>
+	    <my-cities my-province="team.province" my-city="team.city" my-district="team.district" ng-if="team"/>
+	</div>
+	<div class="form-group">
+	    <label for="">身份证号码：</label>
+	    <input type="text" class="form-control" ng-model="team.uid" placeholder="请输入身份证号码">
+	</div>
+	<div class="form-group">
+	    <label for="">曾就职装饰公司：</label>
+	    <input type="text" class="form-control" ng-model="team.company" placeholder="请输入曾就职装饰公司">
+	</div>
+	<div class="form-group">
+	    <label for="">从业年限：(年)[注意：只能填数字]</label>
+	    <input type="text" class="form-control" ng-model="team.work_year" placeholder="请输入从业年限">
+	</div>
+	<div class="form-group">
+	    <label for="">擅长工种：</label>
+			<str-dropdown curopt="team.good_at" opts="teamGoodAts"/>
+	</div>
+	<div class="form-group">
+	    <label for="">正在施工工地：</label>
+	    <input type="text" class="form-control" ng-model="team.working_on" placeholder="请输入正在施工工地">
+	</div>
+	<div class="form-group">
+	    <label for="">上传身份正面：</label>
+	    <div class="file">
+	      <p class="tips">*作品上传每张大小为3M以内jpeg/jpg/png格式图片</p>
+				<upload-image id="upload1" ids="[team.uid_image1]" max-image-count="1" uploader="uploader1"><upload-image>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="">上传身份反面：</label>
+	    <div class="file">
+	      <p class="tips">*作品上传每张大小为3M以内jpeg/jpg/png格式图片</p>
+				<upload-image id="upload2" ids="[team.uid_image2]" max-image-count="1" uploader="uploader2"><upload-image>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <button type="button" class="btn btn-success" ng-click="upDataTeam()">更新施工团队</button>
+	    <button type="button" class="btn btn-default" ng-click="close()">取消编辑</button>
+	</div>
+</form>

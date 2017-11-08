@@ -1,0 +1,33 @@
+<form name="searchForm" class="row searchForm" ng-keyup="myKeyup($event, config.search_word)" novalidate>
+	<p class="col-md-12" ng-bind="config.title"></p>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2 time-choose">开始时间</div>
+			<div class="col-md-3">
+				<p class="input-group">
+				  	<input type="text" name="startTimeInput" class="form-control start-time" uib-datepicker-popup 
+				  		ng-model="dtStart" is-open="startTime.status.opened" datepicker-options="startTime.dateOptions" close-text="关闭" clear-text="清除" current-text="今天" required />
+				  	<span class="input-group-btn">
+				  		<button type="button" class="btn btn-default" ng-click="startTime.open($event)">
+				  			<i class="glyphicon glyphicon-calendar"></i>
+				  		</button>
+				  	</span>
+			  	</p>
+			</div>
+			<div class="col-md-1 time-choose text-center visible-md-block visible-lg-block">--</div>
+			<div class="col-md-2 time-choose">结束时间</div>
+			<div class="col-md-3">
+				<p class="input-group">
+				  	<input type="text" name="endTimeInput" class="form-control end-time" uib-datepicker-popup 
+				  		ng-model="dtEnd" ng-change="setTime()" is-open="endTime.status.opened" datepicker-options="endTime.dateOptions" 
+				  		close-text="关闭" clear-text="清除" current-text="今天" required />
+				  	<span class="input-group-btn">
+				  		<button type="button" class="btn btn-default" ng-click="endTime.open($event)">
+				  			<i class="glyphicon glyphicon-calendar"></i>
+				  		</button>
+				  	</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</form>

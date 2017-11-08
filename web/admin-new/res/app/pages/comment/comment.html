@@ -1,0 +1,45 @@
+<div class="row comment-page common">
+	<date-range-picker config="config" delegate="delegate" dt-start="dtStart" dt-end="dtEnd"></date-range-picker>
+	<search-input config="config" delegate="delegate"></search-input>
+
+	<div class="panel panel-info ng-scope text-center table-responsive">
+		<table class="table table-bordered table-striped">
+			<tbody>
+
+				<tr class="info thead">
+					<th class="text-center">评论ID</th>
+					<th>
+						<div ng-class="{'-1':'tablesorter-headerDesc item-width',
+							undefined:'tablesorter-header item-width',
+							'1':'tablesorter-headerAsc item-width'}[sort.date]" ng-click="sortData('date')">评论时间&nbsp;</div>
+					</th>
+					<th class="text-center">内容</th>
+					<th class="text-center">管理员操作</th>
+				</tr>
+
+				<tr ng-repeat="user in userList" class="content-width">
+					<td>{{user._id}}</td>
+					<td class="text-left">{{user.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td class="text-left">
+						<div class="content" title="{{user.content}}">{{user.content}}</div>
+					</td>
+					<td class="text-center">
+						<a href="javascript:;" ng-click="forbidComment(user._id)">屏蔽</a>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+		<load-data ng-hide="loading.loadData"></load-data>
+		<no-data ng-if="loading.notData"></no-data>
+	</div>
+
+	<div class="text-center" ng-if="loading.loadData && !loading.notData">
+		<uib-pagination total-items="pagination.totalItems" first-text="首页" next-text="下一页" previous-text="上一页" last-text="尾页" ng-model="pagination.currentPage" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" rotate="false" ng-change="pagination.pageChanged()"></uib-pagination>
+		<span class="pagecode">当前：{{pagination.currentPage}} / {{numPages}} 页 总共 {{pagination.totalItems}} 条数据</span>
+	</div>
+	<div class="col-md-12">
+		<div export-data class="hidden-xs"></div>
+	</div>
+</div>

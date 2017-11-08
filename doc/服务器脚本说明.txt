@@ -1,0 +1,38 @@
+===== 生产环境服务器 =====
+【数据库备份】
+脚本（/xvdb/tools/production_backup/db_backup.sh）每晚3点定时备份数据库到目录：/xvdb/tools/production_backup （保留最近10天的备份）
+
+【网站及后台API】
+每个版本的代码布署在目录：/xvdb/release
+
+【网站监控】
+布署了monit服务，可通过网址访问管理界面：http://101.200.196.159:2812/ （帐号：Jyz-admin/Jyz20150608）
+监控会间隔15分钟执行一次，有以下监控：
+1. errorlog-monitor：监控脚本运行情况 -- 服务器的错误日志监控脚本（/xvdb/tools/errorlog-monitor/notify.sh）
+2. gm-monit：监控脚本运行情况 -- 该脚本用来解决 gm 进程引起的内存泄露（/xvdb/tools/monitor-utils/gm_monitor.sh）
+3. mongo：监控数据库进程运行情况 -- 如果连续2次发现数据库进程占用内存超过系统内存 50% 的情况，发送报警邮件；
+                                 -- 如果连续2次发现数据库进程占用 cpu 超过 70% 的情况，发送报警邮件；
+4. node-server：监控 node 进程运行情况 -- 如果连续2次发现 node 进程占用内存超过系统内存 50% 的情况，发送报警邮件；
+                                       -- 如果连续2次发现 node 进程占用 cpu 超过 50% 的情况，发送报警邮件；
+5. redis：监控 redis 进程运行情况 -- 如果连续2次发现 redis 进程占用内存超过系统内存 30% 的情况，发送报警邮件；
+                                  -- 如果连续2次发现 redis 进程占用 cpu 超过 30% 的情况，发送报警邮件；
+6. space：监控服务器磁盘使用情况 -- 如果根目录 / 下的磁盘使用率超过80%，发送报警邮件；如果根目录 / 下的 inode 使用率超过90%，发送报警邮件；
+                                 -- 如果磁盘 /xvdb 的使用率超过80%，发送报警邮件；如果磁盘 /xvdb 的 inode 使用率超过90%，发送报警邮件；
+7. system: 临控服务器总体运行情况 -- 如果系统内存使用率超过 80%，发送报警邮件；
+                                  -- 如果交换分区开始被使用，发送报警邮件；
+说明：报警邮件设置为发送给 sunny.hu@myjyz.com
+
+
+===== 测试服务器 =====
+【禅道系统】
+管理程序：/opt/zbox/zbox {start|stop|restart|status}
+一般不用管，相关程序会随系统启动而运行起来
+
+【网站及后台API】
+测试服务器目录：/xvdb/tools/testing-server
+自动化布署脚本：/xvdb/tools/build.sh，升级到最新的tag或指定的tag。
+
+【数据库脚本】从生产环境导数据到目标数据库（开发数据库或测试数据库（默认））
+/xvdb/tools/db/db_migrate.sh
+
+

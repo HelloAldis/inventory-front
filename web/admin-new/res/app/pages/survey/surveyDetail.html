@@ -1,0 +1,12 @@
+<ol class="breadcrumb"><li><a ui-sref="index">首页</a></li><li><a ui-sref="survey">问卷调查</a></li><li class="active">内部问卷调查</li></ol>
+<div class="panel panel-default" ng-repeat="data in itemData">
+  <div class="panel-heading">{{data.title}}</div>
+  <div class="panel-body">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="item in data.item">
+          <span class="badge">{{data.count[$index] != undefined ? data.count[$index] : 0}}</span>
+          <i ng-bind-html="item | to_trusted"></i>
+        </li>
+      </ul>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="row data-statis-page common">
+	<div class="panel panel-info ng-scope text-center table-responsive">
+		<table id= 'a' class="table table-bordered table-striped">
+			<tbody>
+				<tr class="info thead text-nowrap">
+					<th class="text-center">项目</th>
+					<th class="text-center" ng-repeat="range in timeRanges">
+						{{range.name}} <br/>
+						{{range.range['$gte'] | date:'yy/MM/dd' }}-{{range.range['$lte'] | date:'yy/MM/dd' }}
+					</th>
+				</tr>
+				<tr ng-repeat="row in querys" class="text-nowrap">
+					<td>{{row.name}}</td>
+					<td ng-repeat="num in statistic[$index] track by $index">
+						<a ui-sref="{{querys[$parent.$index].key}}(getDetail(querys[$parent.$index].querys[$index]))">{{num}}</a>
+					</td>
+				</tr>
+			</tbody>
+			<div class="load-data">
+				<load-data ng-hide="loading.loadData"></load-data>
+				<no-data ng-if="loading.notData"></no-data>
+			</div>
+		</table>
+	</div>
+	<div class="col-md-12">
+		<div export-data class="hidden-xs"></div>
+	</div>
+</div>

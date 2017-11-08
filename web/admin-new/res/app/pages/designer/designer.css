@@ -1,0 +1,28 @@
+.designer-page .online-status-btn button{
+	width: 68px;
+}
+
+.userInfo .img-list div{
+	padding-right: 5px;
+	margin-bottom: 10px;
+}
+
+.userInfo .img-list div p{
+	margin: 0;
+	line-height: 20px;
+	white-space: normal;
+}
+
+.userInfo .form-group{
+	padding: 0;
+}
+
+.designer-Editor-page .btn{
+	margin-top: 10px;
+	width: 54px;
+	height: 34px;
+}
+
+.designer-info-page .form-group .btn{
+	margin-bottom: 10px;
+}

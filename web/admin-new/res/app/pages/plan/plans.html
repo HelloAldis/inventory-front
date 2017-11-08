@@ -1,0 +1,59 @@
+<div class="row plan-page common">
+	<ul class="row list-inline col-md-12">
+		方案状态：
+		<li ng-repeat="auth in authList">
+			<button type="button" class="btn btn-default"
+				ng-class="{true:'btn-warning',false:'btn-default'}[auth.cur]" 
+				ng-click="authBtn(auth.id)">{{auth.name}}
+			</button>
+		</li>
+	</ul>
+	
+	<date-range-picker config="config" delegate="delegate" dt-start="dtStart" dt-end="dtEnd"></date-range-picker>
+	<search-input config="config" delegate="delegate"></search-input>
+
+	<div class="panel panel-info ng-scope text-center table-responsive">
+		<table class="table table-bordered table-striped">
+			<tbody>
+				<tr class="info thead text-nowrap">
+					<th class="text-center">方案ID</th>
+					<th  ng-class="{'-1':'tablesorter-headerDesc', undefined:'tablesorter-header', '1':'tablesorter-headerAsc'}[sort.request_date]" ng-click="sortData('request_date')">预约时间&nbsp;</th>
+					<th  ng-class="{'-1':'tablesorter-headerDesc', undefined:'tablesorter-header', '1':'tablesorter-headerAsc'}[sort.get_phone_time]" ng-click="sortData('get_phone_time')">获取电话时间&nbsp;</th>
+					<th  ng-class="{'-1':'tablesorter-headerDesc', undefined:'tablesorter-header', '1':'tablesorter-headerAsc'}[sort.house_check_time]" ng-click="sortData('house_check_time')">量房时间&nbsp;</th>
+					<th class="text-center">当前状态</th>
+					<th  ng-class="{'-1':'tablesorter-headerDesc', undefined:'tablesorter-header', '1':'tablesorter-headerAsc'}[sort.last_status_update_time]" ng-click="sortData('last_status_update_time')">状态更新时间&nbsp;</th>
+					<th class="text-center">设计师姓名</th>
+					<th class="text-center">设计师电话</th>
+					<th class="text-center">方案名字</th>
+					<th class="text-center">业主姓名</th>
+					<th class="text-center">业主电话</th>
+					<th>查看方案</th>
+				</tr>
+				<tr ng-repeat="user in userList" class="text-nowrap">
+					<td>{{user._id}}</td>
+					<td class="text-left">{{user.request_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td class="text-left">{{user.get_phone_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td class="text-left">{{user.house_check_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td>{{user.status | planFilter}}</td>
+					<td class="text-left">{{user.last_status_update_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td>{{user.designer.username}}({{user.biaoshi}})</td>
+					<td>{{user.designer.phone}}</td>
+					<td>{{user.name}}</td>
+					<td>{{user.user.username}}</td>
+					<td>{{user.user.phone}}</td>
+					<td class="text-left"><a target="_blank" href="{{('/tpl/user/plans.html?pid=' + user._id) | pcUrl}}" class="btns browse">预览方案</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<load-data ng-hide="loading.loadData"></load-data>
+		<no-data ng-if="loading.notData"></no-data>
+	</div>
+
+	<div class="text-center" ng-if="loading.loadData && !loading.notData">
+		<uib-pagination total-items="pagination.totalItems" first-text="首页" next-text="下一页" previous-text="上一页" last-text="尾页" ng-model="pagination.currentPage" max-size="pagination.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" rotate="false" ng-change="pagination.pageChanged()"></uib-pagination>
+		<span class="pagecode">当前：{{pagination.currentPage}} / {{numPages}} 页 总共 {{pagination.totalItems}} 条数据</span>
+	</div>
+	<div class="col-md-12">
+		<div export-data class="hidden-xs"></div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<div class="bootstrap-tagsinput">
+	<span ng-repeat="item in tagsInputModel" class="tag label label-primary"
+		style="display: inline;">
+		{{item}}
+		<span data-role="remove" ng-click="moveTag($index)"></span>
+	</span>
+	<input class="tag-input" type="text" placeholder="placeholder" 
+		ng-keyup="myKeyup($event)" ng-blur="onblur()" ng-model="textInput"/>
+</div>

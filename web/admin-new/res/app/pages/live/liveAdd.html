@@ -1,0 +1,93 @@
+<form>
+  <div class="form-group">
+    <label for="phone">设计师查询：</label>
+    <input type="text" class="form-control" placeholder="可以输入手机号码或者设计师姓名" ng-model="phone" ng-blur="phoneChange(phone)">
+  </div>
+  <div class="form-group">
+  	<label for="phone">设计师列表：</label>
+    <kv-dropdown curkey="dataMapped.designerid" keyval="num:name" opts="designer">
+    </kv-dropdown>
+  </div>
+  <div class="form-group">
+    <label>上传封面图：*图片宽高最好不要小于500x500</label>
+    <upload-image id="upload1" max-image-count="1" uploader="uploader1"><upload-image>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">项目经理：</label>
+    <input type="text" class="form-control" ng-model="dataMapped.manager" placeholder="请输入项目经理">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">直播时间：</label>
+      <p class="input-group" style="width:50%">
+        <input type="text" class="form-control" uib-datepicker-popup ng-model="dataMapped.start_at" is-open="startTime.status.opened" datepicker-options="startTime.dateOptions" close-text="关闭" clear-text="清除" current-text="今天" required />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="startTime.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">所在地区：</label>
+    <my-cities my-province="dataMapped.province" my-city="dataMapped.city" my-district="dataMapped.district" ng-if="dataMapped"/>
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">小区名称：</label>
+    <input type="text" class="form-control" ng-model="dataMapped.cell" placeholder="请输入小区名称">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修户型：</label>
+    <kv-dropdown curkey="dataMapped.house_type" keyval="num:name" opts="house_type">
+    </kv-dropdown>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修面积：(m&sup2;)[注意：只能填数字]</label>
+    <input type="text" class="form-control" ng-model="dataMapped.house_area" placeholder="请输入装修面积例如：100">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修风格：</label>
+    <kv-dropdown curkey="dataMapped.dec_style" keyval="num:name" opts="dec_style">
+    </kv-dropdown>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修类型：</label>
+    <kv-dropdown curkey="dataMapped.dec_type" keyval="num:name" opts="dec_type">
+    </kv-dropdown>
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword1">包工类型：</label>
+    <kv-dropdown curkey="dataMapped.work_type" keyval="num:name" opts="work_type">
+    </kv-dropdown>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">装修造价：(万元)[注意：只能填数字]</label>
+    <input type="text" class="form-control" ng-model="dataMapped.total_price" placeholder="请输入装修造价例如：100">
+  </div>
+   <!--<div class="form-group">-->
+    <!--<label for="exampleInputPassword1">设计方案简介：</label>-->
+    <!--<textarea class="form-control" rows="3" ng-model="dataMapped.description" placeholder="请输入设计方案简介"></textarea>-->
+  <!--</div>-->
+  <div class="form-group">
+    <label for="exampleInputPassword1">当前阶段：</label>
+    <kv-dropdown curkey="dataMapped.processName" keyval="num:name" opts="dec_flow">
+    </kv-dropdown>
+  </div>
+  <!-- <div class="form-group">
+    <label for="exampleInputPassword1">当前开始时间：[注意时间格式：2015-10-01]</label>
+    <p class="input-group" style="width:50%">
+      <input type="text" class="form-control" uib-datepicker-popup ng-model="dataMapped.processDate" is-open="processTime.status.opened" datepicker-options="processTime.dateOptions" close-text="关闭" clear-text="清除" current-text="今天" required />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="processTime.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+  </div> -->
+  <div class="form-group">
+    <label for="exampleInputPassword1">上传装修效果图：</label>
+    <upload-image id="upload2" max-image-count="9" uploader="uploader2"><upload-image>
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword1">当前阶段描述：</label>
+    <textarea class="form-control" rows="3" ng-model="dataMapped.processDescription" placeholder="请输入当前阶段描述"></textarea>
+  </div>
+  <button type="button" class="btn btn-success" ng-click="addLive()">创建装修直播</button>
+</form>
+<script type="text/javascript">
