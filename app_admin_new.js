@@ -7,21 +7,18 @@ const path = require('path');
 const compression = require('compression');
 const session = require('express-session');
 const timeout = require('connect-timeout');
-// const passport = require('passport');
+const RedisStore = require('connect-redis')(session);
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const helmet = require('helmet');
+
 const req_res_log = require('lib/middlewares/req_res_log');
 const api_router_web_v2 = require('lib/router/api_router_web_v2');
 const auth = require('lib/middlewares/auth');
 const responseUtil = require('lib/middlewares/response_util');
-const platform_check = require('lib/middlewares/platform_check');
-const RedisStore = require('connect-redis')(session);
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const logger = require('lib/common/logger');
 const web_static = require('lib/middlewares/web_static');
-const helmet = require('helmet');
-//防治跨站请求伪造攻击
-//const csurf = require('csurf');
-const api_statistic = require('lib/middlewares/api_statistic');
+
 
 //config the web app
 const app = express();
@@ -79,7 +76,7 @@ app.use('/', web_static(express, path.join(__dirname, 'web/admin-new')));
 app.use('/api', responseUtil);
 
 // routes
-app.use('/api/v2', function (req, res, next) {
+app.use('/api/v1', function (req, res, next) {
   if (!(req.body instanceof Buffer)) {
     logger.debug(req.body);
   }
@@ -89,7 +86,7 @@ app.use('/api/v2', function (req, res, next) {
 
 //API Request logger
 app.use('/api', req_res_log);
-app.use('/api/v2/web', cors(), platform_check, api_statistic.api_statistic, api_router_web_v2);
+app.use('/api/v1', cors(), api_router_web_v2);
 
 // error handler
 app.use(function (err, req, res, next) {
